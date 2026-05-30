@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { siteIdentity, copyrightConfig } from "@/data/siteConfig";
+
 export default function Copyright() {
   return (
     <div className="copyright-area-one">
@@ -7,28 +9,28 @@ export default function Copyright() {
           <div className="col-lg-12">
             <div className="main-wrapper">
               <p className="copy-right-para tmp-link-animation">
-                © Arun S {new Date().getFullYear()} | All Rights Reserved
-              </p>{" "}
+                © {siteIdentity.name} {new Date().getFullYear()} | All Rights Reserved
+              </p>
               <ul className="tmp-link-animation dark-content">
                 <li>
-                  <a href="#">Trams &amp; Condition</a>
+                  <a href={copyrightConfig.termsHref}>{copyrightConfig.termsLabel}</a>
                 </li>
                 <li>
-                  <a href="#">Privacy Policy</a>
+                  <a href={copyrightConfig.privacyHref}>{copyrightConfig.privacyLabel}</a>
                 </li>
                 <li>
-                  <Link to={`/contact`}>Contact Us</Link>
+                  <Link to="/contact">{copyrightConfig.contactLabel}</Link>
                 </li>
               </ul>
               <ul className="tmp-link-animation light-content">
                 <li>
-                  <a href="#">Trams &amp; Condition</a>
+                  <a href={copyrightConfig.termsHref}>{copyrightConfig.termsLabel}</a>
                 </li>
                 <li>
-                  <a href="#">Privacy Policy</a>
+                  <a href={copyrightConfig.privacyHref}>{copyrightConfig.privacyLabel}</a>
                 </li>
                 <li>
-                  <Link to={`/contact-white`}>Contact Us</Link>
+                  <Link to="/contact-white">{copyrightConfig.contactLabel}</Link>
                 </li>
               </ul>
             </div>

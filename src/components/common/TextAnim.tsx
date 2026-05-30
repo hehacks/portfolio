@@ -79,7 +79,7 @@ export default function TextAnim() {
             ref={textRef}
             className="text-para-documents tmp-scroll-trigger tmp-fade-in inv-title-animation-wrap animation-order-1"
           >
-            A <span>cybersecurity leader</span> with 11+ years of experience
+            A <span>cybersecurity leader</span> with 12+ years of experience
             in product security, application security, cloud security, and
             cyber forensics. Chapter Lead for{" "}
             <span>Null & OWASP</span> communities,

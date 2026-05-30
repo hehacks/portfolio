@@ -1,73 +1,8 @@
-type Role = {
-  title: string;
-  location: string;
-  description: string;
-  icon: string;
-  status: string;
-};
-
-type Event = {
-  event: string;
-  location: string;
-  icon: string;
-  type: string;
-};
-
-const communityRoles: Role[] = [
-  {
-    title: "Chapter Lead — null Security Community",
-    location: "Bangalore",
-    description:
-      "Leading the null security community chapter — organizing meetups, workshops, and knowledge-sharing sessions for security professionals.",
-    icon: "fa-users",
-    status: "ACTIVE",
-  },
-  {
-    title: "Chapter Lead — null | OWASP",
-    location: "Coimbatore",
-    description:
-      "Co-leading the OWASP Coimbatore chapter — driving application security awareness and community engagement in the region.",
-    icon: "fa-shield",
-    status: "ACTIVE",
-  },
-  {
-    title: "Active Contributor & Moderator",
-    location: "BSides · null · OWASP",
-    description:
-      "Active contributor, moderator, and member across BSides, null, and OWASP communities. Frequent speaker and trainer at major conferences.",
-    icon: "fa-microphone",
-    status: "ONGOING",
-  },
-];
-
-const speakingEvents: Event[] = [
-  {
-    event: "Diana Initiative",
-    location: "Las Vegas, USA",
-    icon: "fa-star",
-    type: "KEYNOTE",
-  },
-  {
-    event: "Defcon Adversary Village",
-    location: "c0c0n · Defcon",
-    icon: "fa-skull-crossbones",
-    type: "TALK",
-  },
-  {
-    event: "BSides",
-    location: "Multiple Cities",
-    icon: "fa-code",
-    type: "SPEAKER",
-  },
-  {
-    event: "CSI",
-    location: "Computer Society of India",
-    icon: "fa-building-columns",
-    type: "TRAINER",
-  },
-];
+import { communitySection, communityRoles, speakingEvents } from "@/data/community";
 
 export default function Community() {
+  const s = communitySection;
+
   return (
     <section className="cyber-community-area" id="community">
       <div className="container">
@@ -76,17 +11,13 @@ export default function Community() {
           <div className="cyber-section-eyebrow">
             <span className="dot" />
             <span className="bracket">[</span>
-            <span className="label">COMMUNITY_NODES</span>
+            <span className="label">{s.eyebrowLabel}</span>
             <span className="bracket">]</span>
           </div>
           <h2 className="cyber-comm-title">
-            Community <span className="grad">Leadership</span> & Speaking
+            {s.titleMain}<span className="grad">{s.titleHighlight}</span>{s.titleEnd}
           </h2>
-          <p className="cyber-comm-lede">
-            Building and contributing to security communities across India and
-            globally — through chapter leadership, moderation, and conference
-            speaking.
-          </p>
+          <p className="cyber-comm-lede">{s.lede}</p>
         </div>
 
         {/* Roles */}
@@ -98,7 +29,7 @@ export default function Community() {
                   <i className={`fa-light ${r.icon}`} />
                 </span>
                 <div className="cyber-role-meta">
-                  <span className="cyber-role-status">
+                  <span className="cyber-role-status" data-status={r.status}>
                     <span className="bdg-pulse" />
                     {r.status}
                   </span>
@@ -121,12 +52,9 @@ export default function Community() {
           <div className="cyber-speak-head">
             <div className="cyber-speak-headline">
               <span className="prompt">{">"}</span>
-              <h3>Conference Speaking &amp; Training</h3>
+              <h3>{s.speakingBlockTitle}</h3>
             </div>
-            <p>
-              Invited speaker and trainer at leading global security
-              conferences.
-            </p>
+            <p>{s.speakingBlockSub}</p>
           </div>
 
           <div className="cyber-speak-grid">

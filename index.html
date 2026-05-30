@@ -4,19 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' https://www.google.com https://www.gstatic.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      frame-src https://www.google.com;
+      connect-src 'self' https://api.emailjs.com;
+      img-src 'self' data: https: blob:;
+    " />
+    <!-- X-Frame-Options via meta equivalent -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <title>
       Arun S | Principal Security Architect | Cybersecurity Expert
     </title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <!-- Combined into one request + font-display=swap prevents render blocking -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Preload LCP hero portrait so browser fetches it immediately -->
+    <link rel="preload" as="image" href="/assets/images/arun/ARUN.png" fetchpriority="high" />
+    <!-- Preload fixed background so it's ready before first paint -->
+    <link rel="preload" as="image" href="/assets/images/arun/NETWORK.webp" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"

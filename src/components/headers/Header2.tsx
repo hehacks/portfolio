@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
 import { useModalUI } from "@/context/ModalUIContext";
-
-const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#resume-section" },
-  { label: "Skills", href: "#expertise" },
-  { label: "Achievements", href: "#portfolio" },
-  { label: "Community", href: "#community" },
-  { label: "Contact", href: "#contacts" },
-];
+import { navLinks, socialLinks, siteIdentity } from "@/data/siteConfig";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function scrollTo(href: string) {
   if (href === "#") {
@@ -26,18 +18,18 @@ export default function Header2() {
   const { openModal } = useModalUI();
   const [isSticky, setIsSticky] = useState(false);
   const [activeSection, setActiveSection] = useState("#");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
+    if (!isHome) return;
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           setIsSticky(window.scrollY > 150);
-
-          // Highlight active section
-          const sectionIds = navLinks
-            .map((l) => l.href)
-            .filter((h) => h !== "#");
+          const sectionIds = navLinks.map((l) => l.href).filter((h) => h !== "#");
           let current = "#";
           for (const id of sectionIds) {
             const el = document.querySelector(id);
@@ -54,7 +46,28 @@ export default function Header2() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHome]);
+
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    if (isHome) {
+      scrollTo(href);
+    } else {
+      // Navigate to home then scroll after a short delay
+      if (href === "#") {
+        navigate("/");
+      } else {
+        navigate("/");
+        setTimeout(() => {
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 400);
+      }
+    }
+  };
+
+  // Only show the first 3 social links in the header
+  const headerSocials = socialLinks.slice(0, 3);
 
   return (
     <header
@@ -69,7 +82,7 @@ export default function Header2() {
               {/* Logo */}
               <div className="logo">
                 <button
-                  onClick={() => scrollTo("#")}
+                  onClick={() => isHome ? scrollTo("#") : navigate("/")}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -85,8 +98,7 @@ export default function Header2() {
                       width: "40px",
                       height: "40px",
                       borderRadius: "10px",
-                      background:
-                        "linear-gradient(135deg, var(--color-primary), #1D4ED8)",
+                      background: "linear-gradient(135deg, var(--color-primary), #1D4ED8)",
                       display: "inline-flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -96,7 +108,7 @@ export default function Header2() {
                       letterSpacing: "0.5px",
                     }}
                   >
-                    AS
+                    {siteIdentity.initials}
                   </span>
                   <span
                     style={{
@@ -106,23 +118,20 @@ export default function Header2() {
                       letterSpacing: "0.5px",
                     }}
                   >
-                    Arun S
+                    {siteIdentity.name}
                   </span>
                 </button>
               </div>
 
-              {/* Desktop nav — anchor scroll only */}
+              {/* Desktop nav */}
               <nav className="tmp-mainmenu-nav d-none d-xl-block">
                 <ul className="tmp-mainmenu dark-content">
                   {navLinks.map((item) => (
                     <li key={item.href}>
                       <a
-                        href={item.href}
-                        className={activeSection === item.href ? "active" : ""}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          scrollTo(item.href);
-                        }}
+                        href={isHome ? item.href : `/${item.href}`}
+                        className={isHome && activeSection === item.href ? "active" : ""}
+                        onClick={(e) => handleNavClick(e, item.href)}
                       >
                         {item.label}
                       </a>
@@ -135,27 +144,11 @@ export default function Header2() {
               <div className="tmp-header-right">
                 <div className="social-share-wrapper d-none d-md-block">
                   <div className="social-link">
-                    <a
-                      href="https://www.linkedin.com/in/-aruns/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fa-brands fa-linkedin-in" />
-                    </a>
-                    <a
-                      href="https://twitter.com/he_hacks"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fa-brands fa-twitter" />
-                    </a>
-                    <a
-                      href="https://github.com/hehacks"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fa-brands fa-github" />
-                    </a>
+                    {headerSocials.map((s, i) => (
+                      <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                        <i className={s.icon} />
+                      </a>
+                    ))}
                   </div>
                 </div>
 

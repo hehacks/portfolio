@@ -1,6 +1,11 @@
+import React from "react";
 import TyperComponent from "@/components/common/TyperComponent";
+import { heroContent } from "@/data/hero";
+import { socialLinks } from "@/data/siteConfig";
 
 export default function Hero() {
+  const h = heroContent;
+
   return (
     <div className="cyber-hero-area">
       {/* Decorative scan line + corners */}
@@ -12,62 +17,43 @@ export default function Hero() {
           <div className="cyber-hero-left">
             <div className="cyber-terminal-line">
               <span className="cyber-prompt">$</span>
-              <span className="cyber-cmd">whoami</span>
+              <span className="cyber-cmd">{h.terminalCommand}</span>
               <span className="cyber-cursor">_</span>
             </div>
 
             <h1 className="cyber-hero-title">
-              <span className="cyber-hero-greet">I am</span>
-              <span className="cyber-hero-name">Arun S</span>
+              <span className="cyber-hero-greet">{h.greeting}</span>
+              <span className="cyber-hero-name">{h.name}</span>
               <span className="cyber-hero-role">
                 <span className="cd-headline clip is-full-width">
-                  <TyperComponent
-                    strings={[
-                      "Product Security Expert.",
-                      "Security Architect.",
-                      "Cyber Strategist.",
-                      "Cyber Crime Investigator.",
-                      "National Security Scholar.",
-                    ]}
-                  />
+                  <TyperComponent strings={h.typedStrings} />
                 </span>
               </span>
             </h1>
 
             <p className="cyber-hero-disc">
-              Principal Security Architect at{" "}
-              <span className="hl">IBM India</span> with{" "}
-              <span className="hl">11+ years</span> across cybersecurity
-              leadership, application security, cloud security and{" "}
-              <span className="hl">cyber forensics</span>.
+              {h.bioParts.prefix}
+              <span className="hl">{h.bioParts.company}</span>
+              {h.bioParts.middle}
+              <span className="hl">{h.bioParts.years}</span>
+              {h.bioParts.suffix}
+              <span className="hl">{h.bioParts.lastWord}</span>
+              {h.bioParts.end}
             </p>
 
             <div className="cyber-hero-chips">
-              <span className="cyber-chip">
-                <i className="fa-light fa-shield" />
-                AppSec
-              </span>
-              <span className="cyber-chip">
-                <i className="fa-light fa-cloud" />
-                Cloud Security
-              </span>
-              <span className="cyber-chip">
-                <i className="fa-light fa-magnifying-glass" />
-                Forensics
-              </span>
-              <span className="cyber-chip">
-                <i className="fa-light fa-bug" />
-                Threat Modeling
-              </span>
+              {h.chips.map((chip, i) => (
+                <span className="cyber-chip" key={i}>
+                  <i className={chip.icon} />
+                  {chip.label}
+                </span>
+              ))}
             </div>
 
             <div className="cyber-hero-actions">
-              <a
-                className="tmp-btn hover-icon-reverse radius-round"
-                href="#about"
-              >
+              <a className="tmp-btn hover-icon-reverse radius-round" href={h.primaryBtn.href}>
                 <span className="icon-reverse-wrapper">
-                  <span className="btn-text">More About Me</span>
+                  <span className="btn-text">{h.primaryBtn.label}</span>
                   <span className="btn-icon">
                     <i className="fa-sharp fa-regular fa-arrow-right" />
                   </span>
@@ -79,66 +65,40 @@ export default function Hero() {
 
               <a
                 className="cyber-ghost-btn"
-                href="https://topmate.io/"
+                href={h.secondaryBtn.href}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i className="fa-light fa-calendar-check" />
-                <span>Book a Session</span>
+                <i className={h.secondaryBtn.icon} />
+                <span>{h.secondaryBtn.label}</span>
               </a>
             </div>
 
             <div className="cyber-hero-stats">
-              <div className="cyber-stat">
-                <span className="cyber-stat-num">11+</span>
-                <span className="cyber-stat-label">Years in Cyber</span>
-              </div>
-              <div className="cyber-stat-divider" />
-              <div className="cyber-stat">
-                <span className="cyber-stat-num">50+</span>
-                <span className="cyber-stat-label">Enterprise Audits</span>
-              </div>
-              <div className="cyber-stat-divider" />
-              <div className="cyber-stat">
-                <span className="cyber-stat-num">IBM</span>
-                <span className="cyber-stat-label">Principal Architect</span>
-              </div>
+              {h.stats.map((stat, i) => (
+                <React.Fragment key={i}>
+                  {i > 0 && <div className="cyber-stat-divider" />}
+                  <div className="cyber-stat">
+                    <span className="cyber-stat-num">{stat.num}</span>
+                    <span className="cyber-stat-label">{stat.label}</span>
+                  </div>
+                </React.Fragment>
+              ))}
             </div>
 
             <div className="cyber-hero-social">
-              <span className="cyber-social-label">Connect</span>
-              <a
-                href="https://www.linkedin.com/in/-aruns/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-              >
-                <i className="fa-brands fa-linkedin-in" />
-              </a>
-              <a
-                href="https://twitter.com/he_hacks"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-              >
-                <i className="fa-brands fa-twitter" />
-              </a>
-              <a
-                href="https://github.com/hehacks"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-              >
-                <i className="fa-brands fa-github" />
-              </a>
-              <a
-                href="https://www.instagram.com/h3hacks"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <i className="fa-brands fa-instagram" />
-              </a>
+              <span className="cyber-social-label">{h.socialLabel}</span>
+              {socialLinks.map((s, i) => (
+                <a
+                  key={i}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                >
+                  <i className={s.icon} />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -152,39 +112,29 @@ export default function Hero() {
 
               <div className="cyber-portrait">
                 <img
-                  alt="Arun S — Principal Security Architect"
-                  src="/assets/images/arun/banner-01.webp"
+                  alt={h.portraitAlt}
+                  src={h.portraitSrc}
                   width={800}
                   height={1024}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
 
-              <div className="cyber-floating-card card-top">
-                <i className="fa-light fa-lock" />
-                <div>
-                  <span className="ttl">Zero Trust</span>
-                  <span className="sub">Architect</span>
+              {h.floatingCards.map((card, i) => (
+                <div className={`cyber-floating-card ${card.position}`} key={i}>
+                  <i className={card.icon} />
+                  <div>
+                    <span className="ttl">{card.title}</span>
+                    <span className="sub">{card.sub}</span>
+                  </div>
                 </div>
-              </div>
+              ))}
 
-              <div className="cyber-floating-card card-right">
-                <i className="fa-light fa-fingerprint" />
-                <div>
-                  <span className="ttl">Forensics</span>
-                  <span className="sub">DFIR Expert</span>
-                </div>
-              </div>
-
-              <div className="cyber-floating-card card-bottom">
-                <i className="fa-light fa-shield-keyhole" />
-                <div>
-                  <span className="ttl">AppSec</span>
-                  <span className="sub">SDLC + DevSecOps</span>
-                </div>
-              </div>
-
-              <span className="cyber-tag-1">[ SECURE ]</span>
-              <span className="cyber-tag-2">{"<encrypted/>"}</span>
+              {h.decorativeTags.map((tag, i) => (
+                <span key={i} className={`cyber-tag-${i + 1}`}>{tag}</span>
+              ))}
             </div>
           </div>
         </div>

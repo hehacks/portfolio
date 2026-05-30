@@ -1,4 +1,5 @@
 import { portfolioItems } from "@/data/portfolio";
+import { portfolioSection } from "@/data/portfolioSection";
 
 const iconForCategory: Record<string, string> = {
   Awards: "fa-trophy",
@@ -10,6 +11,8 @@ const iconForCategory: Record<string, string> = {
 };
 
 export default function Portfolio() {
+  const s = portfolioSection;
+
   return (
     <section className="cyber-achievements-area" id="portfolio">
       <div className="container">
@@ -18,16 +21,13 @@ export default function Portfolio() {
           <div className="cyber-section-eyebrow">
             <span className="dot" />
             <span className="bracket">[</span>
-            <span className="label">RECOGNITION_LOG</span>
+            <span className="label">{s.eyebrowLabel}</span>
             <span className="bracket">]</span>
           </div>
           <h2 className="cyber-ach-title">
-            Key Achievements & <span className="grad">Recognition</span>
+            {s.titleMain}<span className="grad">{s.titleHighlight}</span>
           </h2>
-          <p className="cyber-ach-lede">
-            Awards, speaking engagements, and recognition from industry leaders
-            for contributions to cybersecurity research and practice.
-          </p>
+          <p className="cyber-ach-lede">{s.lede}</p>
         </div>
 
         {/* Cards */}
@@ -38,11 +38,7 @@ export default function Portfolio() {
             return (
               <article className="cyber-ach-card" key={item.id}>
                 <div className="cyber-ach-media">
-                  <img
-                    src={item.imageSrc}
-                    alt={item.title}
-                    loading="lazy"
-                  />
+                  <img src={item.imageSrc} alt={item.title} loading="lazy" />
                   <span className="cyber-ach-cat">
                     <i className={`fa-light ${icon}`} />
                     {primary}
@@ -55,9 +51,7 @@ export default function Portfolio() {
                   <h3 className="cyber-ach-name">{item.title}</h3>
                   <div className="cyber-ach-tags">
                     {item.tags.map((tag, i) => (
-                      <span className="cyber-ach-tag" key={i}>
-                        #{tag}
-                      </span>
+                      <span className="cyber-ach-tag" key={i}>#{tag}</span>
                     ))}
                   </div>
                 </div>

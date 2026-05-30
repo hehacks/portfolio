@@ -1,53 +1,61 @@
 import emailjs from "@emailjs/browser";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { validateContactForm, LIMITS } from "@/utils/formValidation";
 
 export default function Contact({
   parentClass = "get-in-touch-area tmp-section-gapTop",
 }) {
   const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
+  const [cooldownSecs, setCooldownSecs] = useState(0);
+  // Honeypot — must stay empty; bots fill it automatically
+  const [honeypot, setHoneypot] = useState("");
 
-  const validateEmail = (email: string): boolean => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+  // Countdown timer for cooldown
+  useEffect(() => {
+    if (!cooldown) return;
+    if (cooldownSecs <= 0) { setCooldown(false); return; }
+    const t = setTimeout(() => setCooldownSecs((s) => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldown, cooldownSecs]);
 
   const sandMail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Honeypot check — silently reject bots
+    if (honeypot) return;
+
+    if (cooldown) { toast.warn(`Please wait ${cooldownSecs}s before sending again.`); return; }
+
     const formData = new FormData(form.current!);
-    const email = formData.get("email") as string;
-    const name = formData.get("name") as string;
-    const subject = formData.get("subject") as string;
-    const message = formData.get("message") as string;
+    const error = validateContactForm(
+      {
+        name:    formData.get("name")    as string,
+        email:   formData.get("email")   as string,
+        phone:   formData.get("phone")   as string,
+        subject: formData.get("subject") as string,
+        message: formData.get("message") as string,
+      },
+      true // phone required in this form
+    );
 
-    // Simple client-side validation
-    if (!name || !email || !subject || !message) {
-      toast.error("Please fill out all required fields.");
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      toast.error("Please enter a valid email address.");
-      return;
-    }
+    if (error) { toast.error(error); return; }
 
     try {
       setIsSubmitting(true);
-
       const result = await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         form.current!,
-        {
-          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-        }
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
       );
-
       if (result.status === 200) {
         toast.success("Message sent successfully!");
         form.current?.reset();
+        setCooldown(true);
+        setCooldownSecs(30);
       } else {
         toast.error("Failed to send message. Please try again.");
       }
@@ -74,22 +82,33 @@ export default function Contact({
                     Elevate your brand with Me
                   </h2>
                   <p className="description tmp-scroll-trigger tmp-fade-in animation-order-3">
-                    ished fact that a reader will be distrol acted bioiiy desig
-                    ished fact that a reader will acted ished fact that a reader
-                    will be distrol acted
+                    Available for freelance work and security consulting.
+                    Connect with me for 1:1 sessions.
                   </p>
                 </div>
               </div>
               <div className="col-lg-7">
                 <div className="contact-inner">
                   <div className="contact-form">
-                    <div id="form-messages" className="error" />
                     <form
                       className="tmp-dynamic-form"
                       id="contact-form"
                       ref={form}
                       onSubmit={sandMail}
+                      noValidate
                     >
+                      {/* Honeypot — hidden from real users, bots fill it */}
+                      <input
+                        type="text"
+                        name="_hp_website"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        style={{ display: "none" }}
+                      />
+
                       <div className="contact-form-wrapper row">
                         <div className="col-lg-6">
                           <div className="form-group">
@@ -100,6 +119,8 @@ export default function Contact({
                               placeholder="Your Name"
                               type="text"
                               required
+                              autoComplete="name"
+                              maxLength={LIMITS.name.max}
                             />
                           </div>
                         </div>
@@ -110,8 +131,10 @@ export default function Contact({
                               id="contact-phone"
                               name="phone"
                               placeholder="Phone Number"
-                              type="number"
+                              type="tel"
                               required
+                              autoComplete="tel"
+                              maxLength={LIMITS.phone.max}
                             />
                           </div>
                         </div>
@@ -124,6 +147,8 @@ export default function Contact({
                               placeholder="Your Email"
                               type="email"
                               required
+                              autoComplete="email"
+                              maxLength={LIMITS.email.max}
                             />
                           </div>
                         </div>
@@ -136,6 +161,8 @@ export default function Contact({
                               required
                               name="subject"
                               placeholder="Subject"
+                              autoComplete="off"
+                              maxLength={LIMITS.subject.max}
                             />
                           </div>
                         </div>
@@ -147,6 +174,7 @@ export default function Contact({
                               name="message"
                               id="contact-message"
                               required
+                              maxLength={LIMITS.message.max}
                               defaultValue={""}
                             />
                           </div>
@@ -156,12 +184,14 @@ export default function Contact({
                             <button
                               className="tmp-btn hover-icon-reverse radius-round w-100"
                               type="submit"
-                              disabled={isSubmitting}
+                              disabled={isSubmitting || cooldown}
                             >
                               <span className="icon-reverse-wrapper">
                                 <span className="btn-text">
                                   {isSubmitting
                                     ? "Sending..."
+                                    : cooldown
+                                    ? `Wait ${cooldownSecs}s`
                                     : "Appointment Now"}
                                 </span>
                                 <span className="btn-icon">

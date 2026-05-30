@@ -1,28 +1,10 @@
 import { useEffect, useRef } from "react";
 import { useModalUI } from "@/context/ModalUIContext";
-
-const navLinks = [
-  { label: "Home", href: "#", icon: "fa-house" },
-  { label: "About", href: "#about", icon: "fa-user" },
-  { label: "Experience", href: "#resume-section", icon: "fa-briefcase" },
-  { label: "Skills", href: "#expertise", icon: "fa-shield" },
-  { label: "Achievements", href: "#portfolio", icon: "fa-trophy" },
-  { label: "Community", href: "#community", icon: "fa-users" },
-  { label: "Contact", href: "#contacts", icon: "fa-paper-plane" },
-];
-
-const socials = [
-  { icon: "fa-brands fa-linkedin-in", href: "https://www.linkedin.com/in/-aruns/", label: "LinkedIn" },
-  { icon: "fa-brands fa-github", href: "https://github.com/hehacks", label: "GitHub" },
-  { icon: "fa-brands fa-twitter", href: "https://twitter.com/he_hacks", label: "Twitter" },
-  { icon: "fa-brands fa-instagram", href: "https://www.instagram.com/h3hacks", label: "Instagram" },
-];
+import { navLinks, socialLinks, siteIdentity } from "@/data/siteConfig";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function scrollTo(href: string) {
-  if (href === "#") {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    return;
-  }
+  if (href === "#") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
   const el = document.querySelector(href);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -31,6 +13,9 @@ export default function MobileMenu() {
   const { openModals, closeModal } = useModalUI();
   const menuRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -48,7 +33,16 @@ export default function MobileMenu() {
 
   const handleNav = (href: string) => {
     closeModal("mobileMenu1");
-    setTimeout(() => scrollTo(href), 300);
+    if (isHome) {
+      setTimeout(() => scrollTo(href), 300);
+    } else {
+      if (href === "#") { navigate("/"); return; }
+      navigate("/");
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 500);
+    }
   };
 
   return (
@@ -63,12 +57,9 @@ export default function MobileMenu() {
         <div ref={innerRef} className="cyber-mobile-inner">
           {/* Header */}
           <div className="cyber-mobile-header">
-            <button
-              className="cyber-mobile-logo"
-              onClick={() => handleNav("#")}
-            >
-              <span className="cyber-mobile-logo-icon">AS</span>
-              <span className="cyber-mobile-logo-name">Arun S</span>
+            <button className="cyber-mobile-logo" onClick={() => handleNav("#")}>
+              <span className="cyber-mobile-logo-icon">{siteIdentity.initials}</span>
+              <span className="cyber-mobile-logo-name">{siteIdentity.name}</span>
             </button>
             <button
               className="cyber-mobile-close"
@@ -109,14 +100,14 @@ export default function MobileMenu() {
 
           {/* Topmate CTA */}
           <a
-            href="https://topmate.io/hehacks"
+            href={siteIdentity.topmateUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="cyber-mobile-cta"
             onClick={() => closeModal("mobileMenu1")}
           >
             <i className="fa-light fa-calendar-check" />
-            <span>Book a Session on Topmate</span>
+            <span>{siteIdentity.topmateLabel}</span>
             <i className="fa-light fa-arrow-up-right-from-square" />
           </a>
 
@@ -126,7 +117,7 @@ export default function MobileMenu() {
               <span className="prompt">{">"}</span> Connect
             </span>
             <div className="cyber-mobile-social-row">
-              {socials.map((s, i) => (
+              {socialLinks.map((s, i) => (
                 <a
                   key={i}
                   href={s.href}
@@ -143,9 +134,7 @@ export default function MobileMenu() {
 
           {/* Footer */}
           <div className="cyber-mobile-footer">
-            <span className="cyber-mobile-footer-text">
-              Principal Security Architect · IBM India
-            </span>
+            <span className="cyber-mobile-footer-text">{siteIdentity.tagline}</span>
           </div>
         </div>
       </div>

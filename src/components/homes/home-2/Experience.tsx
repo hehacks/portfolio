@@ -1,239 +1,242 @@
-type TimelineItem = {
-  duration: string;
-  title: string;
-  institute: string;
-  location?: string;
-  highlights?: string[];
-  description?: string;
-  current?: boolean;
-};
+import { useState, useEffect, useRef } from "react";
+import { experiences, experienceSection } from "@/data/experienceSection";
+import { certifications, certificationsSection } from "@/data/certifications";
 
-const experiences: TimelineItem[] = [
-  {
-    duration: "2024 — Present",
-    title: "Principal Security Architect",
-    institute: "IBM India Pvt. Ltd.",
-    location: "Bangalore, IN",
-    current: true,
-  },
-  {
-    duration: "2019 — 2024",
-    title: "Senior Security Team Lead",
-    institute: "IBM India Pvt. Ltd.",
-    location: "Bangalore, IN",
-  },
-  {
-    duration: "2018 — 2019",
-    title: "Senior Security Consultant",
-    institute: "IBM India Pvt. Ltd.",
-    location: "Bangalore, IN",
-  },
-  {
-    duration: "2016 — 2017",
-    title: "Information Security Consultant",
-    institute: "IBM India Pvt. Ltd.",
-    location: "Bangalore, IN",
-  },
-  {
-    duration: "2014 — 2016",
-    title: "Cyber Security Analyst",
-    institute: "Capgemini India Pvt. Ltd.",
-    location: "Chennai, IN",
-  },
-  {
-    duration: "2014",
-    title: "Security Researcher",
-    institute: "Independent",
-  },
-];
+function ExperienceScroll() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-const education: TimelineItem[] = [
-  {
-    duration: "2024",
-    title: "MBA — Master of Business Administration",
-    institute: "Deakin Business School",
-    location: "Melbourne, Australia",
-  },
-  {
-    duration: "2022",
-    title: "PG in Project Management",
-    institute: "IMT Ghaziabad",
-    location: "Delhi, IN",
-  },
-  {
-    duration: "2014",
-    title: "B.Tech — Information Technology",
-    institute: "KGISL Institute of Technology",
-    location: "Coimbatore, IN",
-  },
-];
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    triggerRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i); },
+        { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
 
-const certifications = [
-  {
-    badge: "OffSec",
-    title: "OSCP",
-    full: "Offensive Security Certified Professional",
-    link: "https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/",
-  },
-  {
-    badge: "ISACA",
-    title: "CISM",
-    full: "Certified Information Security Manager",
-    link: "https://www.credly.com/badges/86c431b6-21d4-4517-a4b3-3923d788ccec/linked_in_profile",
-  },
-  {
-    badge: "AWS",
-    title: "AWS Security",
-    full: "Certified Security — Specialty",
-    link: "https://www.credly.com/badges/8e614864-2463-48a3-b7a0-68689825be04/linked_in_profile",
-  },
-  {
-    badge: "INE",
-    title: "eWPTXv2",
-    full: "Web Application Penetration Tester eXtreme",
-    link: "https://certs.ine.com/2b95a880-ec33-4b1c-8006-215f7672d5b8",
-  },
-  {
-    badge: "INE",
-    title: "eWPTv3",
-    full: "Web Application Penetration Tester",
-    link: "https://certs.ine.com/3867bb2e-d955-4808-a34e-83f352cdbc03",
-  },
-  {
-    badge: "Microsoft",
-    title: "Azure Fundamentals",
-    full: "Microsoft Certified: Azure Fundamentals",
-    link: "https://learn.microsoft.com/api/credentials/share/en-gb/ArunS-9939/3075056FA1CFE813?sharingId",
-  },
-];
+  const s = experienceSection;
 
-function TimelineList({ items }: { items: TimelineItem[] }) {
   return (
-    <div className="cyber-timeline-mini">
-      <div className="cyber-timeline-spine" />
-      {items.map((item, i) => (
-        <div className="cyber-timeline-row" key={i}>
-          <div className="cyber-timeline-marker">
-            <span className="cyber-marker-dot" />
-            {item.current && <span className="cyber-marker-pulse" />}
+    <div className="exp-scroll-wrap">
+      <div className="exp-scroll-triggers">
+
+        {/* STICKY HEADER — pinned at top */}
+        <div className="exp-sticky-header">
+          <div className="cyber-section-eyebrow">
+            <span className="dot" />
+            <span className="bracket">[</span>
+            <span className="label">{s.eyebrowLabel}</span>
+            <span className="bracket">]</span>
           </div>
-          <div className="cyber-timeline-card">
-            <div className="cyber-tl-head">
-              <span className="cyber-tl-time">{item.duration}</span>
-              {item.current && (
-                <span className="cyber-tl-badge">
-                  <span className="bdg-pulse" />
-                  Current
-                </span>
-              )}
-            </div>
-            <h4 className="cyber-tl-title">{item.title}</h4>
-            <div className="cyber-tl-meta">
-              <span>
-                <i className="fa-light fa-building" />
-                {item.institute}
-              </span>
-              {item.location && (
-                <span>
-                  <i className="fa-light fa-location-dot" />
-                  {item.location}
-                </span>
-              )}
-            </div>
-          </div>
+          <h2 className="cyber-resume-title">
+            {s.titleMain}<span className="grad">{s.titleHighlight}</span>
+          </h2>
+          <p className="cyber-resume-lede">{s.lede}</p>
         </div>
-      ))}
+
+        {/* STICKY CARD — changes as you scroll */}
+        <div className="exp-sticky-panel">
+          {experiences.map((exp, i) => (
+            <div
+              key={i}
+              className={`exp-display-card ${i === activeIndex ? "active" : ""}`}
+              aria-hidden={i !== activeIndex}
+              data-index={i}
+            >
+              <div className="exp-display-inner">
+                <div className="exp-display-content">
+                  <div className="exp-display-top">
+                    <span className="exp-display-duration">{exp.duration}</span>
+                    {exp.current && (
+                      <span className="exp-current-badge">
+                        <span className="bdg-dot" />
+                        Current
+                      </span>
+                    )}
+                    {exp.isEducation && (
+                      <span className="exp-edu-badge">
+                        <i className="fa-light fa-graduation-cap" />
+                        Education
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="exp-display-title">{exp.title}</h3>
+                  <div className="exp-display-meta">
+                    <span>
+                      <i className="fa-light fa-building" />
+                      {exp.institute}
+                    </span>
+                    {exp.location && (
+                      <span>
+                        <i className="fa-light fa-location-dot" />
+                        {exp.location}
+                      </span>
+                    )}
+                  </div>
+                  {exp.description && (
+                    <p className="exp-display-description">{exp.description}</p>
+                  )}
+                  <div className="exp-display-index">
+                    {String(i + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+                  </div>
+                </div>
+                <div className="exp-display-logo">
+                  {exp.logo ? (
+                    <img src={exp.logo} alt={exp.logoAlt} className="person-img" loading="lazy" decoding="async" />
+                  ) : (
+                    <div className="exp-logo-placeholder">
+                      <i className="fa-light fa-user-shield" />
+                    </div>
+                  )}
+                  {exp.companyLogo && (
+                    <img src={exp.companyLogo} alt={exp.institute} className="company-logo-img" loading="lazy" decoding="async" />
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* One invisible trigger per card — drives the scroll */}
+        {experiences.map((_, i) => (
+          <div
+            key={i}
+            className="exp-scroll-trigger"
+            ref={(el) => { triggerRefs.current[i] = el; }}
+          />
+        ))}
+
+      </div>
     </div>
   );
 }
 
 export default function Experience() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const cs = certificationsSection;
+
+  const openLightbox = (index: number) => setLightboxIndex(index);
+  const closeLightbox = () => setLightboxIndex(null);
+  const goPrev = () => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex((lightboxIndex - 1 + certifications.length) % certifications.length);
+  };
+  const goNext = () => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex((lightboxIndex + 1) % certifications.length);
+  };
+
   return (
-    <section className="cyber-resume-area" id="resume-section">
-      <div className="container">
-        {/* Header */}
-        <div className="cyber-resume-head">
-          <div className="cyber-section-eyebrow">
-            <span className="dot" />
-            <span className="bracket">[</span>
-            <span className="label">CAREER_LOG</span>
-            <span className="bracket">]</span>
+    <>
+      <section className="cyber-resume-area" id="resume-section">
+        {/* Scroll-driven experience — header + cards inside */}
+        <ExperienceScroll />
+
+        {/* Certifications — normal flow after scroll section */}
+        <div className="container">
+          <div className="cyber-cert-block">
+            <div className="cyber-resume-head" style={{ marginTop: "100px" }}>
+              <div className="cyber-section-eyebrow">
+                <span className="dot" />
+                <span className="bracket">[</span>
+                <span className="label">{cs.eyebrowLabel}</span>
+                <span className="bracket">]</span>
+              </div>
+              <h2 className="cyber-resume-title">
+                {cs.titleMain}<span className="grad">{cs.titleHighlight}</span>
+              </h2>
+              <p className="cyber-resume-lede">{cs.lede}</p>
+            </div>
+            <div className="cert-badge-grid">
+              {certifications.map((c, i) => (
+                <div
+                  className="cert-badge-card"
+                  key={c.id}
+                  onClick={() => openLightbox(i)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${c.alt}`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") openLightbox(i);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="cert-badge-img-wrap">
+                    <img src={c.img} alt={c.alt} className="cert-badge-img" width={300} height={300} loading="lazy" decoding="async" />
+                  </div>
+                  <div className="cert-badge-hover">
+                    <i className="fa-solid fa-magnifying-glass-plus" />
+                    <span>View</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <h2 className="cyber-resume-title">
-            Journey Through <span className="grad">Cybersecurity</span>
-          </h2>
-          <p className="cyber-resume-lede">
-            A decade-plus of building, breaking and defending — from analyst to
-            principal architect.
-          </p>
         </div>
+      </section>
 
-        {/* Two-column: Experience + Education */}
-        <div className="cyber-resume-grid">
-          <div className="cyber-resume-col">
-            <div className="cyber-col-header">
-              <div className="cyber-col-icon">
-                <i className="fa-light fa-briefcase" />
-              </div>
-              <div>
-                <h3>Experience</h3>
-                <span>{experiences.length} roles · 11+ years</span>
-              </div>
-            </div>
-            <TimelineList items={experiences} />
-          </div>
-
-          <div className="cyber-resume-col">
-            <div className="cyber-col-header">
-              <div className="cyber-col-icon">
-                <i className="fa-light fa-graduation-cap" />
-              </div>
-              <div>
-                <h3>Education</h3>
-                <span>{education.length} degrees</span>
-              </div>
-            </div>
-            <TimelineList items={education} />
-          </div>
-        </div>
-
-        {/* Certifications row */}
-        <div className="cyber-cert-block">
-          <div className="cyber-cert-header">
-            <div className="cyber-col-icon">
-              <i className="fa-light fa-certificate" />
-            </div>
-            <div>
-              <h3>Certifications</h3>
-              <span>
-                {certifications.length} active credentials in security & cloud
+      {/* Lightbox */}
+      {lightboxIndex !== null && (
+        <div
+          onClick={(e) => {
+            if ((e.target as HTMLElement).classList.contains("cert-lb-backdrop")) closeLightbox();
+          }}
+          className="cert-lb-backdrop"
+          role="dialog"
+          aria-modal="true"
+          style={{
+            position: "fixed", inset: 0, zIndex: 9999,
+            background: "rgba(0,0,0,0.55)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          <div style={{
+            background: "#ffffff", borderRadius: "16px", padding: "32px 24px 24px",
+            boxShadow: "0 32px 80px rgba(0,0,0,0.25)",
+            display: "flex", flexDirection: "column", alignItems: "center", gap: "16px",
+            position: "relative", maxWidth: "min(560px, 92vw)", width: "100%",
+          }}>
+            <button onClick={closeLightbox} aria-label="Close" style={{
+              position: "absolute", top: 12, right: 14,
+              background: "#f3f4f6", border: "none", borderRadius: "50%",
+              width: 36, height: 36, color: "#374151", fontSize: "1rem", cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10000,
+            }}>
+              <i className="fa-solid fa-xmark" />
+            </button>
+            <img
+              src={certifications[lightboxIndex].img}
+              alt={certifications[lightboxIndex].alt}
+              style={{ maxWidth: "100%", maxHeight: "65vh", borderRadius: "10px", objectFit: "contain", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}
+            />
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <button onClick={goPrev} aria-label="Previous" style={{
+                background: "#f3f4f6", border: "1px solid #e5e7eb", borderRadius: "50%",
+                width: 44, height: 44, color: "#374151", fontSize: "1rem", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <i className="fa-solid fa-chevron-left" />
+              </button>
+              <span style={{ color: "#6b7280", fontSize: "0.9rem", fontWeight: 500, minWidth: "60px", textAlign: "center" }}>
+                {lightboxIndex + 1} / {certifications.length}
               </span>
+              <button onClick={goNext} aria-label="Next" style={{
+                background: "#f3f4f6", border: "1px solid #e5e7eb", borderRadius: "50%",
+                width: 44, height: 44, color: "#374151", fontSize: "1rem", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <i className="fa-solid fa-chevron-right" />
+              </button>
             </div>
           </div>
-
-          <div className="cyber-cert-grid">
-            {certifications.map((c, i) => (
-              <a
-                className="cyber-cert-card"
-                key={i}
-                href={c.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="cyber-cert-badge">{c.badge}</span>
-                <h4 className="cyber-cert-title">{c.title}</h4>
-                <p className="cyber-cert-sub">{c.full}</p>
-                <span className="cyber-cert-verify">
-                  <i className="fa-light fa-arrow-up-right-from-square" />
-                  Verify
-                </span>
-                <span className="cyber-cert-corner cyber-cert-corner-tr" />
-                <span className="cyber-cert-corner cyber-cert-corner-bl" />
-              </a>
-            ))}
-          </div>
         </div>
-      </div>
-    </section>
+      )}
+    </>
   );
 }

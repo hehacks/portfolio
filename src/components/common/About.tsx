@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import OdometerComponent from "./OdometerComponent";
+import { aboutSection } from "@/data/about";
+
 export default function About({ parentClass = "about-us-area" }) {
+  const a = aboutSection;
+
   return (
     <section className={parentClass} id="about">
       <div className="container">
@@ -9,19 +13,19 @@ export default function About({ parentClass = "about-us-area" }) {
             <div className="about-us-left-content-wrap bg-vactor-one">
               <div className="years-of-experience-card tmp-scroll-trigger tmp-fade-in animation-order-1">
                 <h2 className="counter card-title">
-                  <OdometerComponent max={11} /> +
+                  <OdometerComponent max={a.yearsOfExperience} /> +
                 </h2>
-                <p className="card-para">years of experience</p>
+                <p className="card-para">{a.yearsLabel}</p>
               </div>
               <div className="design-card tmp-scroll-trigger tmp-fade-in animation-order-2">
                 <div className="design-card-img">
                   <div className="icon">
-                    <i className="fa-sharp fa-thin fa-shield-halved" />
+                    <i className={a.designCard.icon} />
                   </div>
                 </div>
                 <div className="card-info">
-                  <h3 className="card-title">Product Security</h3>
-                  <p className="card-para">IBM India</p>
+                  <h3 className="card-title">{a.designCard.title}</h3>
+                  <p className="card-para">{a.designCard.sub}</p>
                 </div>
               </div>
             </div>
@@ -30,68 +34,42 @@ export default function About({ parentClass = "about-us-area" }) {
             <div className="about-us-right-content-wrap">
               <div className="section-head text-align-left mb--50">
                 <div className="section-sub-title tmp-scroll-trigger tmp-fade-in animation-order-1">
-                  <span className="subtitle">About Me</span>
+                  <span className="subtitle">{a.subtitle}</span>
                 </div>
                 <h2 className="title split-collab tmp-scroll-trigger tmp-fade-in animation-order-2">
-                  Cybersecurity Leadership <br />
-                  & Strategic Consulting
+                  {a.titleAlt}
                 </h2>
                 <p className="description tmp-scroll-trigger tmp-fade-in animation-order-3">
-                  Developing robust cybersecurity strategies and leading security
-                  initiatives across enterprise products. Chapter Lead for Null
-                  Security Community (Bangalore) and OWASP Coimbatore. Expertise
-                  spans e-commerce, healthcare, and banking sectors.
+                  {a.descriptionAlt}
                 </p>
               </div>
               <div className="about-us-section-card row g-5">
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                  <div className="about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-4">
-                    <div className="card-head">
-                      <div className="logo-img">
-                        <img
-                          alt="logo"
-                          loading="lazy"
-                          src="/assets/images/about/logo-1.svg"
-                          width={24}
-                          height={24}
-                        />
+                {a.cards.map((card, i) => (
+                  <div className="col-lg-6 col-md-6 col-sm-6 col-12" key={i}>
+                    <div
+                      className={`about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-${i + 4}`}
+                    >
+                      <div className="card-head">
+                        <div className="logo-img">
+                          <img
+                            alt="logo"
+                            loading="lazy"
+                            src={card.logo}
+                            width={24}
+                            height={24}
+                          />
+                        </div>
+                        <h3 className="card-title">{card.title}</h3>
                       </div>
-                      <h3 className="card-title">Application Security</h3>
+                      <p className="card-para">{card.para}</p>
                     </div>
-                    <p className="card-para">
-                      Identifying and mitigating vulnerabilities in Web, API &
-                      Mobile applications with secure code reviews
-                    </p>
                   </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                  <div className="about-us-card tmponhover tmp-scroll-trigger tmp-fade-in animation-order-5">
-                    <div className="card-head">
-                      <div className="logo-img">
-                        <img
-                          loading="lazy"
-                          alt="logo"
-                          src="/assets/images/about/logo-2.svg"
-                          width={24}
-                          height={24}
-                        />
-                      </div>
-                      <h3 className="card-title">Cloud & Compliance</h3>
-                    </div>
-                    <p className="card-para">
-                      AWS, Azure, GCP security audits with SOC2 and FedRAMP
-                      compliance expertise
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
               <div className="about-btn mt--40 tmp-scroll-trigger tmp-fade-in animation-order-6">
-                <Link
-                  className="tmp-btn hover-icon-reverse radius-round"
-                  to={`/about`}
-                >
+                <Link className="tmp-btn hover-icon-reverse radius-round" to="/about">
                   <span className="icon-reverse-wrapper">
-                    <span className="btn-text">Read More About Me</span>
+                    <span className="btn-text">{a.readMoreLabel}</span>
                     <span className="btn-icon">
                       <i className="fa-sharp fa-regular fa-arrow-right" />
                     </span>
@@ -102,16 +80,9 @@ export default function About({ parentClass = "about-us-area" }) {
                 </Link>
               </div>
               <div className="mt--40 tmp-scroll-trigger tmp-fade-in animation-order-7">
-                <h3 style={{ fontSize: "18px", marginBottom: "15px" }}>Areas of Interest</h3>
+                <h3 style={{ fontSize: "18px", marginBottom: "15px" }}>{a.interestsLabel}</h3>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-                  {[
-                    "WebApp | Mobile | API Security",
-                    "Cloud Security (AWS / Azure / GCP)",
-                    "Cloud Native Security",
-                    "Software Supply Chain Security",
-                    "Threat Modeling",
-                    "OSINT | Forensics",
-                  ].map((interest, i) => (
+                  {a.interests.map((interest, i) => (
                     <span
                       key={i}
                       style={{

@@ -1,27 +1,44 @@
 import emailjs from "@emailjs/browser";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { validateContactForm, LIMITS } from "@/utils/formValidation";
 
 export default function Contact({
   parentClass = "get-in-touch-area tmp-section-gapTop",
 }) {
   const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
+  const [cooldownSecs, setCooldownSecs] = useState(0);
+  // Honeypot — must stay empty; bots fill it automatically
+  const [honeypot, setHoneypot] = useState("");
 
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+  // Countdown timer for cooldown
+  useEffect(() => {
+    if (!cooldown) return;
+    if (cooldownSecs <= 0) { setCooldown(false); return; }
+    const t = setTimeout(() => setCooldownSecs((s) => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldown, cooldownSecs]);
 
   const sendMail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(form.current!);
-    const email = formData.get("email") as string;
 
-    if (!validateEmail(email)) {
-      toast.error("Please enter a valid email address.");
-      return;
-    }
+    // Honeypot check — silently reject bots
+    if (honeypot) return;
+
+    if (cooldown) { toast.warn(`Please wait ${cooldownSecs}s before sending again.`); return; }
+
+    const formData = new FormData(form.current!);
+    const error = validateContactForm({
+      name:    formData.get("name")    as string,
+      email:   formData.get("email")   as string,
+      phone:   formData.get("phone")   as string,
+      subject: formData.get("subject") as string,
+      message: formData.get("message") as string,
+    });
+
+    if (error) { toast.error(error); return; }
 
     try {
       setIsSubmitting(true);
@@ -29,14 +46,13 @@ export default function Contact({
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         form.current!,
-        {
-          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-        }
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
       );
-
       if (result.status === 200) {
         toast.success("Message sent successfully!");
         form.current?.reset();
+        setCooldown(true);
+        setCooldownSecs(30);
       } else {
         toast.error("Failed to send message. Try again later.");
       }
@@ -115,7 +131,20 @@ export default function Contact({
                     id="contact-form"
                     ref={form}
                     onSubmit={sendMail}
+                    noValidate
                   >
+                    {/* Honeypot — hidden from real users, bots fill it */}
+                    <input
+                      type="text"
+                      name="_hp_website"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      style={{ display: "none" }}
+                    />
+
                     <div className="contact-form-wrapper row">
                       {/** Name */}
                       <div className="col-lg-6">
@@ -125,6 +154,8 @@ export default function Contact({
                           placeholder="Your Name"
                           type="text"
                           required
+                          autoComplete="name"
+                          maxLength={LIMITS.name.max}
                         />
                       </div>
 
@@ -134,8 +165,9 @@ export default function Contact({
                           className="input-field"
                           name="phone"
                           placeholder="Phone Number"
-                          type="text"
-                          required
+                          type="tel"
+                          autoComplete="tel"
+                          maxLength={LIMITS.phone.max}
                         />
                       </div>
 
@@ -147,6 +179,8 @@ export default function Contact({
                           placeholder="Your Email"
                           type="email"
                           required
+                          autoComplete="email"
+                          maxLength={LIMITS.email.max}
                         />
                       </div>
 
@@ -158,6 +192,8 @@ export default function Contact({
                           placeholder="Subject"
                           type="text"
                           required
+                          autoComplete="off"
+                          maxLength={LIMITS.subject.max}
                         />
                       </div>
 
@@ -168,6 +204,7 @@ export default function Contact({
                           placeholder="Your Message"
                           name="message"
                           required
+                          maxLength={LIMITS.message.max}
                         />
                       </div>
 
@@ -177,12 +214,14 @@ export default function Contact({
                           <button
                             className="tmp-btn hover-icon-reverse radius-round w-100"
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || cooldown}
                           >
                             <span className="icon-reverse-wrapper">
                               <span className="btn-text">
                                 {isSubmitting
                                   ? "Sending..."
+                                  : cooldown
+                                  ? `Wait ${cooldownSecs}s`
                                   : "Send Message"}
                               </span>
                               <span className="btn-icon">

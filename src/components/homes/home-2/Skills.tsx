@@ -1,59 +1,8 @@
-type SkillGroup = {
-  title: string;
-  icon: string;
-  caption: string;
-  skills: string[];
-};
-
-const groups: SkillGroup[] = [
-  {
-    title: "Product Security & Core",
-    icon: "fa-shield",
-    caption: "Engineering-grade security across the SDLC",
-    skills: [
-      "Application & Cloud Security",
-      "Mobile & Network Security",
-      "AI & Supply Chain Security",
-      "Threat Modeling",
-      "Red Teaming",
-      "Secure Code Review",
-      "DevSecOps",
-      "API Security",
-    ],
-  },
-  {
-    title: "Strategic Security Operations",
-    icon: "fa-crosshairs",
-    caption: "Offensive & investigative depth at scale",
-    skills: [
-      "Open-Source Intelligence (OSINT)",
-      "Offensive Operations",
-      "Cyber Law",
-      "DFIR",
-      "OT & Healthcare Security",
-      "Incident Response",
-      "Risk & Compliance",
-      "Zero Trust Architecture",
-    ],
-  },
-];
-
-const stack = [
-  { label: "AWS", icon: "fa-brands fa-aws" },
-  { label: "Azure", icon: "fa-brands fa-microsoft" },
-  { label: "GCP", icon: "fa-brands fa-google" },
-  { label: "Kubernetes", icon: "fa-light fa-cubes" },
-  { label: "Docker", icon: "fa-brands fa-docker" },
-  { label: "Linux", icon: "fa-brands fa-linux" },
-  { label: "Python", icon: "fa-brands fa-python" },
-  { label: "Burp Suite", icon: "fa-light fa-bug" },
-  { label: "Nmap", icon: "fa-light fa-network-wired" },
-  { label: "Wireshark", icon: "fa-light fa-magnifying-glass" },
-  { label: "Splunk", icon: "fa-light fa-chart-line" },
-  { label: "Git", icon: "fa-brands fa-git-alt" },
-];
+import { skillsSection, skillGroups, techStack } from "@/data/skillsSection";
 
 export default function Skills() {
+  const s = skillsSection;
+
   return (
     <section className="cyber-skills-area">
       <div className="container">
@@ -62,21 +11,18 @@ export default function Skills() {
           <div className="cyber-section-eyebrow">
             <span className="dot" />
             <span className="bracket">[</span>
-            <span className="label">SKILL_MATRIX</span>
+            <span className="label">{s.eyebrowLabel}</span>
             <span className="bracket">]</span>
           </div>
           <h2 className="cyber-skills-title">
-            Capabilities <span className="grad">Across the Stack</span>
+            {s.titleMain}<span className="grad">{s.titleHighlight}</span>
           </h2>
-          <p className="cyber-skills-lede">
-            From architecture to investigation — a tool-agnostic, principles-first
-            approach honed across enterprise engagements.
-          </p>
+          <p className="cyber-skills-lede">{s.lede}</p>
         </div>
 
         {/* Category cards */}
         <div className="cyber-skills-grid">
-          {groups.map((g, i) => (
+          {skillGroups.map((g, i) => (
             <div className="cyber-skills-card" key={i}>
               <div className="cyber-skills-card-head">
                 <span className="cyber-col-icon">
@@ -88,10 +34,10 @@ export default function Skills() {
                 </div>
               </div>
               <div className="cyber-skills-list">
-                {g.skills.map((s, j) => (
+                {g.skills.map((skill, j) => (
                   <span className="cyber-skill-chip" key={j}>
                     <span className="bullet">{">"}</span>
-                    {s}
+                    {skill}
                   </span>
                 ))}
               </div>
@@ -105,10 +51,10 @@ export default function Skills() {
         <div className="cyber-stack-block">
           <div className="cyber-stack-head">
             <span className="prompt">{">"}</span>
-            <h4>Toolbox & Stack</h4>
+            <h4>{s.toolboxLabel}</h4>
           </div>
           <div className="cyber-stack-grid">
-            {stack.map((t, i) => (
+            {techStack.map((t, i) => (
               <div className="cyber-stack-item" key={i}>
                 <i className={t.icon} />
                 <span>{t.label}</span>

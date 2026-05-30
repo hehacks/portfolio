@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-import WOW from "wow.js";
 import gsap from "gsap";
 import { useLocation } from "react-router-dom";
 import { SplitText } from "gsap/SplitText";
-// import WOW from "@/utlis/wow";
 export default function GlobaleffectProvider() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -356,13 +354,6 @@ export default function GlobaleffectProvider() {
         delete e.split;
       });
     };
-  }, [pathname]);
-  useEffect(() => {
-    const wow = new WOW({
-      mobile: false,
-      live: false,
-    });
-    wow.init();
   }, [pathname]);
   return <></>;
 }

@@ -28,6 +28,7 @@ export default function Footer5() {
                         <a
                           className="tmp-btn btn-icon"
                           target="_blank"
+                          rel="noopener noreferrer"
                           href="https://themeforest.net/item/reeni-personal-portfolio-html-template/56387656"
                         >
                           Purchase Reeni{" "}
@@ -73,22 +74,22 @@ export default function Footer5() {
                   <div className="copyright-center text-center">
                     <ul className="social-icon social-default justify-content-center">
                       <li>
-                        <a target="_blank" href="https://www.facebook.com/">
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
                           <i className="fa-brands fa-facebook-f" />
                         </a>
                       </li>
                       <li>
-                        <a target="_blank" href="https://www.twitter.com">
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.twitter.com">
                           <i className="fa-brands fa-twitter" />
                         </a>
                       </li>
                       <li>
-                        <a target="_blank" href="https://www.instagram.com/">
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/">
                           <i className="fa-brands fa-instagram" />
                         </a>
                       </li>
                       <li>
-                        <a target="_blank" href="https://www.linkdin.com/">
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.linkdin.com/">
                           <i className="fa-brands fa-linkedin-in" />
                         </a>
                       </li>
@@ -101,6 +102,7 @@ export default function Footer5() {
                       © {new Date().getFullYear()} Copyright All rights reserved{" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://themeforest.net/user/inversweb/portfolio"
                       >
                         Inversweb

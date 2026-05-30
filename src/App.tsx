@@ -3,13 +3,16 @@ import "odometer/themes/odometer-theme-default.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import HomePage2 from "./pages/homes/index-02";
 import HackLoader from "./components/common/HackLoader";
 import ScrollTopBehaviour from "./components/common/ScrollToTopBehaviour";
 import GlobaleffectProvider from "./components/common/GlobaleffectProvider";
 import { ModalUIProvider } from "./context/ModalUIContext";
+
+// Lazy-load routes — they are only parsed/executed when navigated to
+const HomePage2     = lazy(() => import("./pages/homes/index-02"));
+const BlogDetailPage = lazy(() => import("./pages/blog"));
 
 function App() {
   const [showLoader, setShowLoader] = useState(true);
@@ -17,10 +20,10 @@ function App() {
   const [minTimeElapsed, setMinTimeElapsed] = useState(false);
 
   useEffect(() => {
-    // Ensure loader shows for at least 1.5 seconds
+    // Reduced from 1500ms → 500ms — still long enough for the animation
     const timer = setTimeout(() => {
       setMinTimeElapsed(true);
-    }, 1500);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -30,7 +33,6 @@ function App() {
   };
 
   useEffect(() => {
-    // Hide loader only when both animation is complete AND minimum time has elapsed
     if (animationComplete && minTimeElapsed) {
       setShowLoader(false);
     }
@@ -39,12 +41,12 @@ function App() {
   return (
     <>
       {showLoader && <HackLoader onComplete={handleLoaderComplete} />}
-      
+
       {!showLoader && (
         <>
           <ToastContainer
             position="bottom-left"
-            // autoClose={2000}
+            autoClose={3000}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick
@@ -71,9 +73,13 @@ function App() {
             )}
           >
             <ModalUIProvider>
-              <Routes>
-                <Route path="/" element={<HomePage2 />} />
-              </Routes>
+              {/* Suspense fallback is invisible — loader already handled above */}
+              <Suspense fallback={null}>
+                <Routes>
+                  <Route path="/"           element={<HomePage2 />} />
+                  <Route path="/blog/:slug" element={<BlogDetailPage />} />
+                </Routes>
+              </Suspense>
             </ModalUIProvider>
 
             <ScrollTopBehaviour />

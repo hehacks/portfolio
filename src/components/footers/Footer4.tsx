@@ -46,6 +46,7 @@ export default function Footer4({
                   © {new Date().getFullYear()} . All rights reserved by
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://themeforest.net/user/inversweb/portfolio"
                   >
                     {" "}

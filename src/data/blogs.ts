@@ -1,3 +1,7 @@
+// blogData3 is managed in content.ts — edit there.
+export { blogData3 } from "./content";
+import { blogData3 } from "./content";
+
 export const blogData = [
   {
     id: 1,
@@ -87,69 +91,6 @@ export const blogData2 = [
     description:
       "Aliquam eros justo, posuere loborti viverra lao ullamcorper posuere viverra .Aliquam eros justo, posuere Aliquam eros justo, posuere loborti viverra laoreet matti ullamcorper",
     slug: "each-one-showcases-our-approach-and-dedication-man",
-  },
-];
-
-export const blogData3 = [
-  {
-    id: 1,
-    animationOrder: "animation-order-1",
-    imageSrc: "/assets/images/blog/blog-img-1.jpg",
-    altText: "Blog Thumbnail",
-    date: "2024",
-    author: "Arun S",
-    comments: "Cybersecurity",
-    title: "Purple Teaming with MITRE – Ransomware Adversary Simulation",
-    tags: [
-      "Security",
-      "MITRE",
-      "Red Teaming",
-      "Purple Teaming",
-    ],
-    categories: ["Cybersecurity", "Research"],
-    description:
-      "Exploring adversary simulation techniques using MITRE ATT&CK framework for ransomware defense and purple team operations.",
-    slug: "purple-teaming-mitre-ransomware-adversary-simulation",
-  },
-  {
-    id: 2,
-    animationOrder: "animation-order-2",
-    imageSrc: "/assets/images/blog/blog-img-2.jpg",
-    altText: "Blog Thumbnail",
-    date: "2023",
-    author: "Arun S",
-    comments: "IoT Security",
-    title: "IoT Security – Myth Vs Reality",
-    tags: [
-      "IoT",
-      "Firmware",
-      "Security",
-      "Research",
-    ],
-    categories: ["Cybersecurity", "IoT"],
-    description:
-      "Debunking common myths around IoT security and presenting real-world findings from enterprise IoT device assessments.",
-    slug: "iot-security-myth-vs-reality",
-  },
-  {
-    id: 3,
-    animationOrder: "animation-order-3",
-    imageSrc: "/assets/images/blog/blog-img-3.jpg",
-    altText: "Blog Thumbnail",
-    date: "2023",
-    author: "Arun S",
-    comments: "Cloud Security",
-    title: "Cloud Security Best Practices for Enterprise Applications",
-    tags: [
-      "AWS",
-      "Azure",
-      "Cloud",
-      "Compliance",
-    ],
-    categories: ["Cybersecurity", "Cloud"],
-    description:
-      "A comprehensive guide to securing cloud-native applications across AWS, Azure, and GCP with SOC2 and FedRAMP compliance.",
-    slug: "cloud-security-best-practices-enterprise",
   },
 ];
 
