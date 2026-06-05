@@ -92,17 +92,17 @@ export const heroContent = {
   primaryBtn:   { label: "More About Me",  href: "#about" },
   secondaryBtn: { label: "Book a Session", href: "https://topmate.io/hehacks", icon: "fa-light fa-calendar-check" },
   stats: [
-    { num: "12+", label: "Years in Cyber" },
-    { num: "50+", label: "Enterprise Audits" },
-    { num: "IBM", label: "Principal Architect" },
+    { num: "12+", label: "Years in Cyber Security" },
+    { num: "100+", label: "Clients" },
+    { num: "IBM", label: "Principal Security Architect" },
   ],
   socialLabel: "Connect",
   portraitSrc: "/assets/images/arun/ARUN.png",
   portraitAlt: "Arun S — Principal Security Architect",
   floatingCards: [
-    { icon: "fa-light fa-lock",           title: "Zero Trust", sub: "Architect",       position: "card-top" },
+    { icon: "fa-light fa-lock",           title: "GRC", sub: "Architect",       position: "card-top" },
     { icon: "fa-light fa-fingerprint",    title: "Forensics",  sub: "DFIR Expert",     position: "card-right" },
-    { icon: "fa-light fa-shield-keyhole", title: "AppSec",     sub: "SDLC + DevSecOps",position: "card-bottom" },
+    { icon: "fa-light fa-shield-keyhole", title: "AppSec",     sub: "Pentesting + Red Teaming",position: "card-bottom" },
   ],
   decorativeTags: ["[ SECURE ]", "<encrypted/>"],
 };
@@ -119,7 +119,7 @@ export const aboutSection = {
   lede: "I architect security from code to cloud — leading product security initiatives, mentoring teams, and helping enterprises build resilient, compliance-ready systems.",
   photoSrc: "/assets/images/arun/HERO2.jpg",
   photoAlt: "Arun S — Principal Security Architect",
-  badge: { icon: "fa-light fa-shield-keyhole", title: "IBM India", sub: "Principal Architect" },
+  badge: { icon: "fa-light fa-shield-keyhole", title: "IBM India", sub: "Principal Security Architect" },
   bio: [
     { parts: [
       { text: "Arun S is a ", bold: false },
@@ -127,7 +127,7 @@ export const aboutSection = {
       { text: " with over 12 years of hands-on experience across product security, application security, cloud security, and cyber forensics.", bold: false },
     ]},
     { parts: [
-      { text: "He has led security programs for large-scale enterprise products, conducted 50+ security audits, and disclosed 20+ CVEs across global platforms. His expertise spans web, mobile, API, cloud-native, and supply chain security.", bold: false },
+      { text: "He has led security programs for large-scale enterprise products, conducted 100+ security audits. His expertise spans web, mobile, API, cloud-native, and supply chain security.", bold: false },
     ]},
     { parts: [
       { text: "Arun is the ", bold: false },
@@ -156,6 +156,9 @@ export const aboutSection = {
     "Software Supply Chain Security",
     "Threat Modeling",
     "OSINT | Forensics",
+    "International Speaker",
+    "Conferences: Defcon | Diana Initiative | BSides | c0c0n",
+    "Communities: Null | OWASP | ISAC",
   ],
   yearsOfExperience: 12,
   yearsLabel: "years of experience",
@@ -178,7 +181,7 @@ export const experienceSection = {
   eyebrowLabel: "CAREER_LOG",
   titleMain: "Journey Through ",
   titleHighlight: "Cybersecurity",
-  lede: "A decade-plus of building, breaking and defending — from analyst to principal architect.",
+  lede: "A decade-plus of building, breaking and defending — from analyst to principal security architect.",
 };
 
 export type ExperienceItem = {
@@ -190,11 +193,11 @@ export type ExperienceItem = {
 
 export const experiences: ExperienceItem[] = [
   { duration: "2024 — Present", title: "Principal Security Architect",   institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",      current: true, description: "Leading enterprise-wide product security strategy and architecture across IBM's global portfolio. Driving zero-trust adoption, threat modeling programs, and DevSecOps integration for large-scale cloud-native products.", logo: "/assets/images/experience/1.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-  { duration: "2019 — 2024",    title: "Senior Security Team Lead",       institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Led a cross-functional security team delivering application security assessments, secure code reviews, and SAST/DAST pipeline integration across 20+ IBM product lines. Mentored junior security engineers and coordinated with global stakeholders.", logo: "/assets/images/experience/2.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+  { duration: "2019 — 2024",    title: "Senior Security Team Lead",       institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Led a cross-functional security team delivering application security assessments, cloud & cloud native security (WebApp + API + Mobile App + Network), and SAST/DAST pipeline integration across 200+ IBM Software Group product lines. Mentored junior security engineers and coordinated with global stakeholders.", logo: "/assets/images/experience/2.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
   { duration: "2018 — 2019",    title: "Senior Security Consultant",      institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Conducted in-depth security assessments for IBM enterprise clients across banking, healthcare, and SaaS sectors. Specialized in API security, cloud configuration reviews, and compliance gap analysis for SOC2 and FedRAMP frameworks.", logo: "/assets/images/experience/3.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
   { duration: "2016 — 2017",    title: "Information Security Consultant", institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Delivered web application and network security assessments for IBM's managed security services clients. Identified and disclosed critical vulnerabilities, authored detailed remediation reports, and supported client security awareness programs.", logo: "/assets/images/experience/4.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
   { duration: "2014 — 2016",    title: "Cyber Security Analyst",          institute: "Capgemini India Pvt. Ltd.",    location: "Chennai, IN",                       description: "Performed vulnerability assessments and penetration testing for enterprise clients in the BFSI and telecom sectors. Worked on SIEM monitoring, incident response, and security hardening of Windows and Linux environments.", logo: "/assets/images/experience/5.png", logoAlt: "Capgemini",companyLogo: "/Capgemini.svg" },
-  { duration: "2014",           title: "Security Researcher",             institute: "Independent",                                                                 description: "Independent security research focused on web application vulnerabilities. Discovered and responsibly disclosed 20+ CVEs across global platforms, earning recognition from major technology vendors.", logo: "/assets/images/experience/6.png", logoAlt: "Independent" },
+  { duration: "2014",           title: "Security Researcher",             institute: "Independent",                                                                 description: "Independent security research focused on web application vulnerabilities. Independent bug bounty hunter, earning recognition from major technology vendors.", logo: "/assets/images/experience/6.png", logoAlt: "Independent" },
   // ── Education ──
   { duration: "2024",           title: "MBA — Master of Business Administration", institute: "Deakin Business School",       location: "Melbourne, Australia", isEducation: true, description: "Global MBA with a focus on strategic management, technology leadership, and international business. Strengthened executive communication, organizational strategy, and cross-cultural leadership skills.", logo: "/assets/images/experience/9.png", logoAlt: "Deakin Business School",       companyLogo: "/deakin-university_.png" },
   { duration: "2022",           title: "PG in Project Management",               institute: "IMT Ghaziabad",                location: "Delhi, IN",            isEducation: true, description: "Postgraduate program covering project planning, risk management, agile methodologies, and stakeholder management. Applied learnings to security program delivery and cross-team coordination at IBM.", logo: "/assets/images/experience/8.png", logoAlt: "IMT Ghaziabad",                companyLogo: "/IMT-Logo-Web.png" },
@@ -215,7 +218,7 @@ export const certificationsSection = {
   descriptionAlt: "Industry-recognized certifications validating expertise in security auditing, penetration testing, cloud security, and enterprise security management.",
 };
 
-export const certificateCount = 30; // ← change this number to show more/fewer certificates
+export const certificateCount = 28; // ← change this number to show more/fewer certificates
 
 export const certifications = Array.from({ length: certificateCount }, (_, i) => ({
   id: i + 1,

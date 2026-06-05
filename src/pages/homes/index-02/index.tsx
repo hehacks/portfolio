@@ -14,7 +14,7 @@ const Portofolio  = lazy(() => import("@/components/homes/home-2/Portfolio"));
 const Experiences2 = lazy(() => import("@/components/homes/home-2/Expertise"));
 const Community   = lazy(() => import("@/components/homes/home-2/Community"));
 const Clients     = lazy(() => import("@/components/homes/home-2/Clients"));
-const Testimonials = lazy(() => import("@/components/homes/home-2/Testimonials"));
+
 const Contact     = lazy(() => import("@/components/homes/home-2/Contact"));
 const Blogs       = lazy(() => import("@/components/common/Blogs2"));
 const Footer2     = lazy(() => import("@/components/footers/Footer2"));
@@ -64,7 +64,7 @@ export default function HomePage2() {
           <Experiences2 />
           <Community />
           <Clients />
-          <Testimonials />
+
           <Contact />
           <Blogs />
           <Footer2 />
