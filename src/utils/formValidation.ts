@@ -25,6 +25,40 @@ export const LIMITS = {
   message: { min: 10, max: 2000 },
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Real-time input filters — strip disallowed characters on every keystroke
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Name: letters, spaces, hyphens, apostrophes, dots (supports Unicode names) */
+export const filterName = (val: string): string =>
+  val.replace(/[^a-zA-Z\u00C0-\u024F\u0900-\u097F\s'.\-]/g, "");
+
+/** Phone: digits, +, -, spaces, parentheses */
+export const filterPhone = (val: string): string =>
+  val.replace(/[^\d+\-\s().]/g, "");
+
+/** Email: standard email characters only */
+export const filterEmail = (val: string): string =>
+  val.replace(/[^a-zA-Z0-9@._+\-]/g, "");
+
+/** Subject: letters, digits, spaces, and common punctuation */
+export const filterSubject = (val: string): string =>
+  val.replace(/[<>{}[\]\\]/g, "");
+
+/** Message: allow almost everything except angle brackets and backslashes (XSS vectors) */
+export const filterMessage = (val: string): string =>
+  val.replace(/[<>\\]/g, "");
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Input pattern attributes for HTML5 native validation hints
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const PATTERNS = {
+  name:  "[A-Za-z\\u00C0-\\u024F\\s'.\\-]+",
+  phone: "[\\d+\\-\\s().]+",
+  email: "[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}",
+};
+
 export type FormFields = {
   name: string;
   email: string;

@@ -4,7 +4,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
 import { contactSection } from "@/data/contactSection";
 import { socialLinks, siteIdentity } from "@/data/siteConfig";
-import { validateContactForm, LIMITS } from "@/utils/formValidation";
+import { validateContactForm, LIMITS, filterName, filterPhone, filterEmail, filterSubject, filterMessage, PATTERNS } from "@/utils/formValidation";
 
 export default function Contact() {
   const form = useRef<HTMLFormElement>(null);
@@ -125,28 +125,28 @@ export default function Contact() {
                 <div className="cyber-form-row">
                   <div className="cyber-form-group">
                     <label>{s.fields.name.label}</label>
-                    <input name="name" placeholder={s.fields.name.placeholder} type="text" required autoComplete="name" maxLength={LIMITS.name.max} />
+                    <input name="name" placeholder={s.fields.name.placeholder} type="text" required autoComplete="name" maxLength={LIMITS.name.max} pattern={PATTERNS.name} onInput={(e) => { const el = e.currentTarget; el.value = filterName(el.value); }} />
                   </div>
                   <div className="cyber-form-group">
                     <label>{s.fields.email.label}</label>
-                    <input name="email" placeholder={s.fields.email.placeholder} type="email" required autoComplete="email" maxLength={LIMITS.email.max} />
+                    <input name="email" placeholder={s.fields.email.placeholder} type="email" required autoComplete="email" maxLength={LIMITS.email.max} pattern={PATTERNS.email} onInput={(e) => { const el = e.currentTarget; el.value = filterEmail(el.value); }} />
                   </div>
                 </div>
 
                 <div className="cyber-form-row">
                   <div className="cyber-form-group">
                     <label>{s.fields.phone.label}</label>
-                    <input name="phone" placeholder={s.fields.phone.placeholder} type="tel" autoComplete="tel" maxLength={LIMITS.phone.max} />
+                    <input name="phone" placeholder={s.fields.phone.placeholder} type="tel" autoComplete="tel" maxLength={LIMITS.phone.max} pattern={PATTERNS.phone} onInput={(e) => { const el = e.currentTarget; el.value = filterPhone(el.value); }} />
                   </div>
                   <div className="cyber-form-group">
                     <label>{s.fields.subject.label}</label>
-                    <input name="subject" placeholder={s.fields.subject.placeholder} type="text" required autoComplete="off" maxLength={LIMITS.subject.max} />
+                    <input name="subject" placeholder={s.fields.subject.placeholder} type="text" required autoComplete="off" maxLength={LIMITS.subject.max} onInput={(e) => { const el = e.currentTarget; el.value = filterSubject(el.value); }} />
                   </div>
                 </div>
 
                 <div className="cyber-form-group cyber-form-full">
                   <label>{s.fields.message.label}</label>
-                  <textarea name="message" placeholder={s.fields.message.placeholder} rows={5} required maxLength={LIMITS.message.max} />
+                  <textarea name="message" placeholder={s.fields.message.placeholder} rows={5} required maxLength={LIMITS.message.max} onInput={(e) => { const el = e.currentTarget; el.value = filterMessage(el.value); }} />
                 </div>
 
                 {/* reCAPTCHA */}

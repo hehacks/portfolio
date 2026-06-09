@@ -1,7 +1,7 @@
 import emailjs from "@emailjs/browser";
 import { useRef, useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { validateContactForm, LIMITS } from "@/utils/formValidation";
+import { validateContactForm, LIMITS, filterName, filterPhone, filterEmail, filterSubject, filterMessage, PATTERNS } from "@/utils/formValidation";
 
 export default function Contact({
   parentClass = "get-in-touch-area tmp-section-gapTop",
@@ -156,6 +156,8 @@ export default function Contact({
                           required
                           autoComplete="name"
                           maxLength={LIMITS.name.max}
+                          pattern={PATTERNS.name}
+                          onInput={(e) => { const el = e.currentTarget; el.value = filterName(el.value); }}
                         />
                       </div>
 
@@ -168,6 +170,8 @@ export default function Contact({
                           type="tel"
                           autoComplete="tel"
                           maxLength={LIMITS.phone.max}
+                          pattern={PATTERNS.phone}
+                          onInput={(e) => { const el = e.currentTarget; el.value = filterPhone(el.value); }}
                         />
                       </div>
 
@@ -181,6 +185,8 @@ export default function Contact({
                           required
                           autoComplete="email"
                           maxLength={LIMITS.email.max}
+                          pattern={PATTERNS.email}
+                          onInput={(e) => { const el = e.currentTarget; el.value = filterEmail(el.value); }}
                         />
                       </div>
 
@@ -194,6 +200,7 @@ export default function Contact({
                           required
                           autoComplete="off"
                           maxLength={LIMITS.subject.max}
+                          onInput={(e) => { const el = e.currentTarget; el.value = filterSubject(el.value); }}
                         />
                       </div>
 
@@ -205,6 +212,7 @@ export default function Contact({
                           name="message"
                           required
                           maxLength={LIMITS.message.max}
+                          onInput={(e) => { const el = e.currentTarget; el.value = filterMessage(el.value); }}
                         />
                       </div>
 

@@ -418,10 +418,8 @@ export const contactSection = {
   submitLabel: "Send Message",
   sendingLabel: "Sending...",
 
-  // Google reCAPTCHA v2 site key
-  // Test key (always passes): 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
-  // Replace with your real site key from https://www.google.com/recaptcha/admin
-  recaptchaSiteKey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+  // Google reCAPTCHA v2 site key — loaded from env variable
+  recaptchaSiteKey: import.meta.env.VITE_RECAPTCHA_SITE_KEY || "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
