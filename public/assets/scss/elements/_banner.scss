@@ -9,7 +9,7 @@
 
 .tmp-banner-one-area {
   padding-top: 26px;
-  background-image: url("/portfolio/assets/images/banner/banner-background-one.jpg");
+  background-image: url("/assets/images/banner/banner-background-one.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -21,7 +21,7 @@
     padding-bottom: 100px;
   }
   &.style-2 {
-    background-image: url(/portfolio/assets/images/bg/bg-image-3.jpg);
+    background-image: url(/assets/images/bg/bg-image-3.jpg);
     min-height: 950px;
     display: flex;
     align-items: center;
@@ -64,7 +64,7 @@
     align-items: center;
     justify-content: center;
     padding-top: 0;
-    background-image: url(/portfolio/assets/images/banner/banner-background-02.jpg);
+    background-image: url(/assets/images/banner/banner-background-02.jpg);
 
     @media #{$sm-layout} {
       height: auto;
@@ -131,7 +131,7 @@
 
   &.style-4 {
     min-height: 900px;
-    background-image: url(/portfolio/assets/images/banner/banner-background-04.jpg);
+    background-image: url(/assets/images/banner/banner-background-04.jpg);
     position: relative;
     background-image: none;
     .galaxy {
@@ -1111,7 +1111,7 @@
   }
 
   &::after {
-    content: url("/portfolio/assets/images/banner/banner-six-shape.png");
+    content: url("/assets/images/banner/banner-six-shape.png");
     position: absolute;
     top: 50%;
     left: 50%;
@@ -2149,7 +2149,7 @@
 }
 
 .banner-twelve-area.with-bg-image {
-  background-image: url(/portfolio/assets/images/bg/01.webp) !important;
+  background-image: url(/assets/images/bg/01.webp) !important;
   background-position: center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
@@ -2384,7 +2384,7 @@
 }
 
 .bg_modern-banner-bg {
-  background-image: url(/portfolio/assets/images/bg/05.webp);
+  background-image: url(/assets/images/bg/05.webp);
   height: 950px;
   position: relative;
   display: flex;
