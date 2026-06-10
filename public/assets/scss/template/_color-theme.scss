@@ -7,13 +7,13 @@
 .primary-yellow {
   --color-primary: #ffb400;
   .bg_image--8 {
-    background-image: url(/assets/images/bg/04.webp);
+    background-image: url(/portfolio/assets/images/bg/04.webp);
   }
 }
 .color-pink {
   --color-primary: #ea4c89;
   .bg_image--2 {
-    background-image: url(/assets/images/bg/bg-image-13.jpg);
+    background-image: url(/portfolio/assets/images/bg/bg-image-13.jpg);
   }
 }
 .color-primary-3rd {
@@ -36,7 +36,7 @@
   --color-border: #d9dde0;
   background: #ffffff;
   .bg_modern-banner-bg {
-    background-image: url(/assets/images/bg/06.webp);
+    background-image: url(/portfolio/assets/images/bg/06.webp);
   }
   .bg_modern-banner-bg::after {
     display: none;
@@ -51,11 +51,11 @@
     color: #141414;
   }
   .tmp-banner-one-area {
-    background-image: url(/assets/images/bg/bg-image-12.jpg);
+    background-image: url(/portfolio/assets/images/bg/bg-image-12.jpg);
     background-color: #ededed;
   }
   &.demo-model .tmp-banner-one-area.style-2 {
-    background-image: url(/assets/images/bg/03.webp);
+    background-image: url(/portfolio/assets/images/bg/03.webp);
   }
   .rpp-banner-five-area {
     background-color: #ededed;
@@ -205,17 +205,17 @@
   }
 
   .tmp-banner-one-area.style-2 {
-    background-image: url(/assets/images/bg/bg-image-9.jpg);
+    background-image: url(/portfolio/assets/images/bg/bg-image-9.jpg);
   }
 
   .bg_image--8 {
-    background-image: url(/assets/images/bg/bg-image-8.jpg);
+    background-image: url(/portfolio/assets/images/bg/bg-image-8.jpg);
   }
   &.primary-yellow .bg_image--8 {
-    background-image: url(/assets/images/bg/04.webp);
+    background-image: url(/portfolio/assets/images/bg/04.webp);
   }
   .tmp-banner-one-area.style-4 {
-    background-image: url(/assets/images/bg/bg-image-11.jpg);
+    background-image: url(/portfolio/assets/images/bg/bg-image-11.jpg);
   }
 
   .tmp-popup-mobile-menu .header-top .close-menu .close-button {
@@ -343,7 +343,7 @@
   }
 
   .banner-twelve-area.with-bg-image {
-    background-image: url(/assets/images/bg/02.webp) !important;
+    background-image: url(/portfolio/assets/images/bg/02.webp) !important;
   }
   .header-left-sticky .inner-wrapper::after {
     background: transparent;

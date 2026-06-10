@@ -9,7 +9,7 @@
       default-src 'self';
       script-src 'self' https://www.google.com https://www.gstatic.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-      font-src 'self' https://fonts.gstatic.com;
+      font-src 'self' https://fonts.gstatic.com data:;
       frame-src https://www.google.com;
       connect-src 'self' https://api.emailjs.com;
       img-src 'self' data: blob: https://upload.wikimedia.org;
@@ -27,9 +27,9 @@
       rel="stylesheet"
     />
     <!-- Preload LCP hero portrait so browser fetches it immediately -->
-    <link rel="preload" as="image" href="/assets/images/arun/ARUN.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/portfolio/assets/images/arun/ARUN.png" fetchpriority="high" />
     <!-- Preload fixed background so it's ready before first paint -->
-    <link rel="preload" as="image" href="/assets/images/arun/NETWORK.webp" />
+    <link rel="preload" as="image" href="/portfolio/assets/images/arun/NETWORK.webp" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"

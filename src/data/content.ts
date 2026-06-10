@@ -4,6 +4,8 @@
 // ║  Change any value below and it will instantly reflect on the site.         ║
 // ╚══════════════════════════════════════════════════════════════════════════════╝
 
+import { asset } from "@/utils/assetPath";
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. SITE IDENTITY & CONFIG
 // ─────────────────────────────────────────────────────────────────────────────
@@ -18,7 +20,7 @@ export const siteIdentity = {
   email: "arun@hehacks.com",
   topmateUrl: "https://topmate.io/hehacks",
   topmateLabel: "Book a Session on Topmate",
-  backgroundImage: "/assets/images/arun/NETWORK.webp",
+  backgroundImage: asset("/assets/images/arun/NETWORK.webp"),
 };
 
 export const pageMetadata = {
@@ -97,7 +99,7 @@ export const heroContent = {
     { num: "IBM", label: "Principal Security Architect" },
   ],
   socialLabel: "Connect",
-  portraitSrc: "/assets/images/arun/ARUN.png",
+  portraitSrc: asset("/assets/images/arun/ARUN.png"),
   portraitAlt: "Arun S — Principal Security Architect",
   floatingCards: [
     { icon: "fa-light fa-lock",           title: "GRC", sub: "Architect",       position: "card-top" },
@@ -117,7 +119,7 @@ export const aboutSection = {
   titleEnd: " &",
   titleLine2: "Strategic Consulting",
   lede: "I architect security from code to cloud — leading product security initiatives, mentoring teams, and helping enterprises build resilient, compliance-ready systems.",
-  photoSrc: "/assets/images/arun/HERO2.jpg",
+  photoSrc: asset("/assets/images/arun/HERO2.jpg"),
   photoAlt: "Arun S — Principal Security Architect",
   badge: { icon: "fa-light fa-shield-keyhole", title: "IBM India", sub: "Principal Security Architect" },
   bio: [
@@ -167,8 +169,8 @@ export const aboutSection = {
   titleAlt: "Cybersecurity Leadership & Strategic Consulting",
   descriptionAlt: "Developing robust cybersecurity strategies and leading security initiatives across enterprise products. Chapter Lead for Null Security Community (Bangalore) and OWASP Coimbatore. Expertise spans e-commerce, healthcare, and banking sectors.",
   cards: [
-    { logo: "/assets/images/about/logo-1.svg", title: "Application Security", para: "Identifying and mitigating vulnerabilities in Web, API & Mobile applications with secure code reviews" },
-    { logo: "/assets/images/about/logo-2.svg", title: "Cloud & Compliance",   para: "AWS, Azure, GCP security audits with SOC2 and FedRAMP compliance expertise" },
+    { logo: asset("/assets/images/about/logo-1.svg"), title: "Application Security", para: "Identifying and mitigating vulnerabilities in Web, API & Mobile applications with secure code reviews" },
+    { logo: asset("/assets/images/about/logo-2.svg"), title: "Cloud & Compliance",   para: "AWS, Azure, GCP security audits with SOC2 and FedRAMP compliance expertise" },
   ],
   readMoreLabel: "Read More About Me",
 };
@@ -192,16 +194,16 @@ export type ExperienceItem = {
 };
 
 export const experiences: ExperienceItem[] = [
-  { duration: "2024 — Present", title: "Principal Security Architect",   institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",      current: true, description: "Leading enterprise-wide product security strategy and architecture across IBM's global portfolio. Driving zero-trust adoption, threat modeling programs, and DevSecOps integration for large-scale cloud-native products.", logo: "/assets/images/experience/1.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-  { duration: "2019 — 2024",    title: "Senior Security Team Lead",       institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Led a cross-functional security team delivering application security assessments, cloud & cloud native security (WebApp + API + Mobile App + Network), and SAST/DAST pipeline integration across 200+ IBM Software Group product lines. Mentored junior security engineers and coordinated with global stakeholders.", logo: "/assets/images/experience/2.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-  { duration: "2018 — 2019",    title: "Senior Security Consultant",      institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Conducted in-depth security assessments for IBM enterprise clients across banking, healthcare, and SaaS sectors. Specialized in API security, cloud configuration reviews, and compliance gap analysis for SOC2 and FedRAMP frameworks.", logo: "/assets/images/experience/3.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-  { duration: "2016 — 2017",    title: "Information Security Consultant", institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Delivered web application and network security assessments for IBM's managed security services clients. Identified and disclosed critical vulnerabilities, authored detailed remediation reports, and supported client security awareness programs.", logo: "/assets/images/experience/4.png", logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-  { duration: "2014 — 2016",    title: "Cyber Security Analyst",          institute: "Capgemini India Pvt. Ltd.",    location: "Chennai, IN",                       description: "Performed vulnerability assessments and penetration testing for enterprise clients in the BFSI and telecom sectors. Worked on SIEM monitoring, incident response, and security hardening of Windows and Linux environments.", logo: "/assets/images/experience/5.png", logoAlt: "Capgemini",companyLogo: "/Capgemini.svg" },
-  { duration: "2014",           title: "Security Researcher",             institute: "Independent",                                                                 description: "Independent security research focused on web application vulnerabilities. Independent bug bounty hunter, earning recognition from major technology vendors.", logo: "/assets/images/experience/6.png", logoAlt: "Independent" },
+  { duration: "2024 — Present", title: "Principal Security Architect",   institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",      current: true, description: "Leading enterprise-wide product security strategy and architecture across IBM's global portfolio. Driving zero-trust adoption, threat modeling programs, and DevSecOps integration for large-scale cloud-native products.", logo: asset("/assets/images/experience/1.png"), logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+  { duration: "2019 — 2024",    title: "Senior Security Team Lead",       institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Led a cross-functional security team delivering application security assessments, cloud & cloud native security (WebApp + API + Mobile App + Network), and SAST/DAST pipeline integration across 200+ IBM Software Group product lines. Mentored junior security engineers and coordinated with global stakeholders.", logo: asset("/assets/images/experience/2.png"), logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+  { duration: "2018 — 2019",    title: "Senior Security Consultant",      institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Conducted in-depth security assessments for IBM enterprise clients across banking, healthcare, and SaaS sectors. Specialized in API security, cloud configuration reviews, and compliance gap analysis for SOC2 and FedRAMP frameworks.", logo: asset("/assets/images/experience/3.png"), logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+  { duration: "2016 — 2017",    title: "Information Security Consultant", institute: "IBM India Pvt. Ltd.",          location: "Bangalore, IN",                     description: "Delivered web application and network security assessments for IBM's managed security services clients. Identified and disclosed critical vulnerabilities, authored detailed remediation reports, and supported client security awareness programs.", logo: asset("/assets/images/experience/4.png"), logoAlt: "IBM",      companyLogo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+  { duration: "2014 — 2016",    title: "Cyber Security Analyst",          institute: "Capgemini India Pvt. Ltd.",    location: "Chennai, IN",                       description: "Performed vulnerability assessments and penetration testing for enterprise clients in the BFSI and telecom sectors. Worked on SIEM monitoring, incident response, and security hardening of Windows and Linux environments.", logo: asset("/assets/images/experience/5.png"), logoAlt: "Capgemini",companyLogo: asset("/Capgemini.svg") },
+  { duration: "2014",           title: "Security Researcher",             institute: "Independent",                                                                 description: "Independent security research focused on web application vulnerabilities. Independent bug bounty hunter, earning recognition from major technology vendors.", logo: asset("/assets/images/experience/6.png"), logoAlt: "Independent" },
   // ── Education ──
-  { duration: "2024",           title: "MBA — Master of Business Administration", institute: "Deakin Business School",       location: "Melbourne, Australia", isEducation: true, description: "Global MBA with a focus on strategic management, technology leadership, and international business. Strengthened executive communication, organizational strategy, and cross-cultural leadership skills.", logo: "/assets/images/experience/9.png", logoAlt: "Deakin Business School",       companyLogo: "/deakin-university_.png" },
-  { duration: "2022",           title: "PG in Project Management",               institute: "IMT Ghaziabad",                location: "Delhi, IN",            isEducation: true, description: "Postgraduate program covering project planning, risk management, agile methodologies, and stakeholder management. Applied learnings to security program delivery and cross-team coordination at IBM.", logo: "/assets/images/experience/8.png", logoAlt: "IMT Ghaziabad",                companyLogo: "/IMT-Logo-Web.png" },
-  { duration: "2014",           title: "B.Tech — Information Technology",        institute: "KGISL Institute of Technology",location: "Coimbatore, IN",       isEducation: true, description: "Bachelor's degree in Information Technology with a strong foundation in networking, operating systems, software engineering, and database management. Graduated with distinction and active participation in technical events.", logo: "/assets/images/experience/7.png", logoAlt: "KGISL Institute of Technology",companyLogo: "/KGiSL-EDU-logo-01.webp" },
+  { duration: "2024",           title: "MBA — Master of Business Administration", institute: "Deakin Business School",       location: "Melbourne, Australia", isEducation: true, description: "Global MBA with a focus on strategic management, technology leadership, and international business. Strengthened executive communication, organizational strategy, and cross-cultural leadership skills.", logo: asset("/assets/images/experience/9.png"), logoAlt: "Deakin Business School",       companyLogo: asset("/deakin-university_.png") },
+  { duration: "2022",           title: "PG in Project Management",               institute: "IMT Ghaziabad",                location: "Delhi, IN",            isEducation: true, description: "Postgraduate program covering project planning, risk management, agile methodologies, and stakeholder management. Applied learnings to security program delivery and cross-team coordination at IBM.", logo: asset("/assets/images/experience/8.png"), logoAlt: "IMT Ghaziabad",                companyLogo: asset("/IMT-Logo-Web.png") },
+  { duration: "2014",           title: "B.Tech — Information Technology",        institute: "KGISL Institute of Technology",location: "Coimbatore, IN",       isEducation: true, description: "Bachelor's degree in Information Technology with a strong foundation in networking, operating systems, software engineering, and database management. Graduated with distinction and active participation in technical events.", logo: asset("/assets/images/experience/7.png"), logoAlt: "KGISL Institute of Technology",companyLogo: asset("/KGiSL-EDU-logo-01.webp") },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -222,7 +224,7 @@ export const certificateCount = 28; // ← change this number to show more/fewer
 
 export const certifications = Array.from({ length: certificateCount }, (_, i) => ({
   id: i + 1,
-  img: `/assets/images/CERTIFICATES/${i + 1}.png`,
+  img: asset(`/assets/images/CERTIFICATES/${i + 1}.png`),
   alt: `Certificate ${i + 1}`,
 }));
 
@@ -304,12 +306,12 @@ export const portfolioSection = {
 };
 
 export const portfolioItems = [
-  { id: 1, animationOrder: 1, imageSrc: "/assets/images/arun/portfolio-01.webp", width: 600, height: 400, title: "Awarded Best Performer at IBM Security Annual Excellence Awards",                                                                                  tags: ["IBM","Security"],              categories: ["Awards","Security","Leadership"],  slug: "ibm-excellence-award" },
-  { id: 2, animationOrder: 2, imageSrc: "/assets/images/arun/portfolio-02.webp", width: 600, height: 400, title: "Global MBA from Deakin Business School, Melbourne, Australia",                                                                                    tags: ["MBA","Melbourne"],             categories: ["Education","Leadership"],          slug: "global-mba-deakin" },
-  { id: 3, animationOrder: 3, imageSrc: "/assets/images/arun/portfolio-03.webp", width: 600, height: 400, title: "Speaker: Purple Teaming with MITRE – Ransomware Adversary Simulation",                                                                            tags: ["Defcon","MITRE","Purple Teaming"], categories: ["Speaking","Security","Research"],slug: "defcon-adversary-village-talk" },
-  { id: 4, animationOrder: 4, imageSrc: "/assets/images/arun/portfolio-04.webp", width: 600, height: 400, title: "National Cyber Security Scholar Program organized by the ISAC with CERT-In & Karnataka Digital Economy Mission (KDEM)",                           tags: ["CERT-In","KDEM","ISAC"],       categories: ["Awards","Research","Leadership"],  slug: "national-cyber-security-scholar" },
-  { id: 5, animationOrder: 5, imageSrc: "/assets/images/arun/portfolio-05.webp", width: 600, height: 400, title: "Honored at the School of Innovation, KGiSL Institute of Technology (KiTE)",                                                                      tags: ["KGiSL","KiTE","Innovation"],   categories: ["Awards","Education"],              slug: "kite-school-of-innovation-launch" },
-  { id: 6, animationOrder: 6, imageSrc: "/assets/images/arun/portfolio-06.webp", width: 600, height: 400, title: "Delivered a talk on 'IoT Security - Myth vs Reality' at the Computer Society of India",                                                          tags: ["IoT","CSI","Speaking"],        categories: ["Speaking","Security","Research"],  slug: "iot-security-myth-vs-reality-csi" },
+  { id: 1, animationOrder: 1, imageSrc: asset("/assets/images/arun/portfolio-01.webp"), width: 600, height: 400, title: "Awarded Best Performer at IBM Security Annual Excellence Awards",                                                                                  tags: ["IBM","Security"],              categories: ["Awards","Security","Leadership"],  slug: "ibm-excellence-award" },
+  { id: 2, animationOrder: 2, imageSrc: asset("/assets/images/arun/portfolio-02.webp"), width: 600, height: 400, title: "Global MBA from Deakin Business School, Melbourne, Australia",                                                                                    tags: ["MBA","Melbourne"],             categories: ["Education","Leadership"],          slug: "global-mba-deakin" },
+  { id: 3, animationOrder: 3, imageSrc: asset("/assets/images/arun/portfolio-03.webp"), width: 600, height: 400, title: "Speaker: Purple Teaming with MITRE – Ransomware Adversary Simulation",                                                                            tags: ["Defcon","MITRE","Purple Teaming"], categories: ["Speaking","Security","Research"],slug: "defcon-adversary-village-talk" },
+  { id: 4, animationOrder: 4, imageSrc: asset("/assets/images/arun/portfolio-04.webp"), width: 600, height: 400, title: "National Cyber Security Scholar Program organized by the ISAC with CERT-In & Karnataka Digital Economy Mission (KDEM)",                           tags: ["CERT-In","KDEM","ISAC"],       categories: ["Awards","Research","Leadership"],  slug: "national-cyber-security-scholar" },
+  { id: 5, animationOrder: 5, imageSrc: asset("/assets/images/arun/portfolio-05.webp"), width: 600, height: 400, title: "Honored at the School of Innovation, KGiSL Institute of Technology (KiTE)",                                                                      tags: ["KGiSL","KiTE","Innovation"],   categories: ["Awards","Education"],              slug: "kite-school-of-innovation-launch" },
+  { id: 6, animationOrder: 6, imageSrc: asset("/assets/images/arun/portfolio-06.webp"), width: 600, height: 400, title: "Delivered a talk on 'IoT Security - Myth vs Reality' at the Computer Society of India",                                                          tags: ["IoT","CSI","Speaking"],        categories: ["Speaking","Security","Research"],  slug: "iot-security-myth-vs-reality-csi" },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -384,11 +386,11 @@ export const testimonialsSection = {
 };
 
 export const testimonials2 = [
-  { name: "Steven Riley",          role: "Global Security Technology Leader, IBM · June 2024",    image: "/assets/images/testimonial/client-img-1.jpg", text: "Arun delivered well-structured engagements with high-standard reporting. His expertise in security testing for IBM Corporate Security devices was exceptional and consistently exceeded expectations.", stars: 5 },
-  { name: "Gayathri Sureshkumar", role: "Senior Software Dev Manager, IBM · May 2020",            image: "/assets/images/testimonial/client-img-1.jpg", text: "Arun's leadership and efficient guidance on the Alert Notification Mobile project was outstanding. He brings clarity and direction to every engagement he leads.", stars: 5 },
-  { name: "Stephen Kawaguchi",    role: "Senior UI Architect, IBM · Jan 2021",                    image: "/assets/images/testimonial/client-img-1.jpg", text: "Arun's cross-team collaboration and innovative security solutions for Cognos Analytics were instrumental in strengthening our product security posture across the board.", stars: 5 },
-  { name: "Gaurav Sharma",        role: "Vice President, IBM · Jan 2018",                         image: "/assets/images/testimonial/client-img-1.jpg", text: "Arun delivered an exceptional Engineering Insights demo for a high-profile Arvind Krishna meeting. His ability to communicate complex security concepts clearly is remarkable.", stars: 5 },
-  { name: "Robert Thoss",         role: "Software Dev & Architecture, IBM · June 2020",           image: "/assets/images/testimonial/client-img-1.jpg", text: "Arun resolved a critical iOS security issue and delivered a timely final report for IoT – Maximo Worker Insights. His responsiveness and thoroughness are commendable.", stars: 5 },
+  { name: "Steven Riley",          role: "Global Security Technology Leader, IBM · June 2024",    image: asset("/assets/images/testimonial/client-img-1.jpg"), text: "Arun delivered well-structured engagements with high-standard reporting. His expertise in security testing for IBM Corporate Security devices was exceptional and consistently exceeded expectations.", stars: 5 },
+  { name: "Gayathri Sureshkumar", role: "Senior Software Dev Manager, IBM · May 2020",            image: asset("/assets/images/testimonial/client-img-1.jpg"), text: "Arun's leadership and efficient guidance on the Alert Notification Mobile project was outstanding. He brings clarity and direction to every engagement he leads.", stars: 5 },
+  { name: "Stephen Kawaguchi",    role: "Senior UI Architect, IBM · Jan 2021",                    image: asset("/assets/images/testimonial/client-img-1.jpg"), text: "Arun's cross-team collaboration and innovative security solutions for Cognos Analytics were instrumental in strengthening our product security posture across the board.", stars: 5 },
+  { name: "Gaurav Sharma",        role: "Vice President, IBM · Jan 2018",                         image: asset("/assets/images/testimonial/client-img-1.jpg"), text: "Arun delivered an exceptional Engineering Insights demo for a high-profile Arvind Krishna meeting. His ability to communicate complex security concepts clearly is remarkable.", stars: 5 },
+  { name: "Robert Thoss",         role: "Software Dev & Architecture, IBM · June 2020",           image: asset("/assets/images/testimonial/client-img-1.jpg"), text: "Arun resolved a critical iOS security issue and delivered a timely final report for IoT – Maximo Worker Insights. His responsiveness and thoroughness are commendable.", stars: 5 },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -435,11 +437,11 @@ export const blogsSection = {
 // 14. TESTIMONIALS (all variants — used by other home pages too)
 // ─────────────────────────────────────────────────────────────────────────────
 export const testimonials = [
-  { id: 1, quote: "Arun delivered well-structured engagements with high-standard reporting. His expertise in security testing for corporate security devices was exceptional.",                                                                                    name: "Steven Riley",          role: "Global Security Technology Leader, IBM · June 2024",    bgImage: "/assets/images/testimonial/bg-image-1png.png", width: 630, height: 720, animationClass: "animation-order-1" },
-  { id: 2, quote: "Arun's leadership and efficient guidance on the Alert Notification Mobile project was outstanding. He consistently delivered beyond expectations.",                                                                                           name: "Gayathri Sureshkumar", role: "Senior Software Development Manager, IBM · May 2020",   bgImage: "/assets/images/testimonial/bg-image-2.png",    width: 444, height: 484, animationClass: "animation-order-2" },
-  { id: 3, quote: "Arun's cross-team collaboration and innovative security solutions for Cognos Analytics were instrumental in strengthening our product security posture.",                                                                                    name: "Stephen Kawaguchi",    role: "Senior UI Architect, IBM · Jan 2021",                   bgImage: "/assets/images/testimonial/bg-image-1png.png", width: 630, height: 720, animationClass: "animation-order-3" },
-  { id: 4, quote: "Arun delivered an exceptional Engineering Insights demo for a high-profile Arvind Krishna meeting. His ability to communicate complex security concepts clearly is remarkable.",                                                              name: "Gaurav Sharma",        role: "Vice President, IBM · Jan 2018",                        bgImage: "/assets/images/testimonial/bg-image-2.png",    width: 444, height: 484, animationClass: "animation-order-1" },
-  { id: 5, quote: "Arun resolved a critical iOS security issue and delivered a timely final report for IoT – Maximo Worker Insights. His responsiveness and thoroughness are commendable.",                                                                     name: "Robert Thoss",         role: "Software Dev & Architecture Security Focal, IBM · June 2020", bgImage: "/assets/images/testimonial/bg-image-1png.png", width: 630, height: 720, animationClass: "animation-order-2" },
+  { id: 1, quote: "Arun delivered well-structured engagements with high-standard reporting. His expertise in security testing for corporate security devices was exceptional.",                                                                                    name: "Steven Riley",          role: "Global Security Technology Leader, IBM · June 2024",    bgImage: asset("/assets/images/testimonial/bg-image-1png.png"), width: 630, height: 720, animationClass: "animation-order-1" },
+  { id: 2, quote: "Arun's leadership and efficient guidance on the Alert Notification Mobile project was outstanding. He consistently delivered beyond expectations.",                                                                                           name: "Gayathri Sureshkumar", role: "Senior Software Development Manager, IBM · May 2020",   bgImage: asset("/assets/images/testimonial/bg-image-2.png"),    width: 444, height: 484, animationClass: "animation-order-2" },
+  { id: 3, quote: "Arun's cross-team collaboration and innovative security solutions for Cognos Analytics were instrumental in strengthening our product security posture.",                                                                                    name: "Stephen Kawaguchi",    role: "Senior UI Architect, IBM · Jan 2021",                   bgImage: asset("/assets/images/testimonial/bg-image-1png.png"), width: 630, height: 720, animationClass: "animation-order-3" },
+  { id: 4, quote: "Arun delivered an exceptional Engineering Insights demo for a high-profile Arvind Krishna meeting. His ability to communicate complex security concepts clearly is remarkable.",                                                              name: "Gaurav Sharma",        role: "Vice President, IBM · Jan 2018",                        bgImage: asset("/assets/images/testimonial/bg-image-2.png"),    width: 444, height: 484, animationClass: "animation-order-1" },
+  { id: 5, quote: "Arun resolved a critical iOS security issue and delivered a timely final report for IoT – Maximo Worker Insights. His responsiveness and thoroughness are commendable.",                                                                     name: "Robert Thoss",         role: "Software Dev & Architecture Security Focal, IBM · June 2020", bgImage: asset("/assets/images/testimonial/bg-image-1png.png"), width: 630, height: 720, animationClass: "animation-order-2" },
 ];
 
 export const testimonials3 = [
