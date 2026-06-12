@@ -5,6 +5,12 @@ import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
   base: "/",
+  server: {
+    // Increase max header size to prevent HTTP 431 errors
+    headers: {
+      "Content-Security-Policy": "",
+    },
+  },
   plugins: [
     react(),
     VitePWA({

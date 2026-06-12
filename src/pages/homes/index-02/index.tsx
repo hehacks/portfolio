@@ -13,6 +13,7 @@ const Skills      = lazy(() => import("@/components/homes/home-2/Skills"));
 const Portofolio  = lazy(() => import("@/components/homes/home-2/Portfolio"));
 const Experiences2 = lazy(() => import("@/components/homes/home-2/Expertise"));
 const Community   = lazy(() => import("@/components/homes/home-2/Community"));
+const PhotoGallery = lazy(() => import("@/components/homes/home-2/PhotoGallery"));
 const Clients     = lazy(() => import("@/components/homes/home-2/Clients"));
 
 const Contact     = lazy(() => import("@/components/homes/home-2/Contact"));
@@ -63,6 +64,7 @@ export default function HomePage2() {
           <Portofolio />
           <Experiences2 />
           <Community />
+          <PhotoGallery />
           <Clients />
 
           <Contact />

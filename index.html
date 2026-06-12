@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Content Security Policy -->
+    <!-- Content Security Policy — disabled during development (blocks Vite HMR).
+         Re-enable for production deployment or use HTTP headers on your server instead. -->
+    <!--
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' https://www.google.com https://www.gstatic.com;
@@ -14,6 +16,7 @@
       connect-src 'self' https://api.emailjs.com;
       img-src 'self' data: blob: https://upload.wikimedia.org;
     " />
+    -->
     <!-- X-Frame-Options via meta equivalent -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <title>
