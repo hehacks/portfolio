@@ -347,6 +347,7 @@ export const speakingEvents = [
   { event: "BSides Delhi",            location: "Delhi, India",             icon: "fa-code",             type: "SPEAKER" },
   { event: "CSI",                     location: "Computer Society of India",icon: "fa-building-columns", type: "TRAINER" },
   { event: "AICTE ATAL",              location: "India",                    icon: "fa-chalkboard-user",  type: "TRAINING" },
+  { event: "ISAC Copconnect",         location: "Expert Intervention Masterclass", icon: "fa-shield",      type: "TRAINING" },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -8,11 +8,8 @@ const photos = [
   { src: "/assets/images/photos/1 (5).jpeg", alt: "Gallery photo 5" },
   { src: "/assets/images/photos/1 (6).jpeg", alt: "Gallery photo 6" },
   { src: "/assets/images/photos/1 (7).jpeg", alt: "Gallery photo 7" },
-  { src: "/assets/images/photos/1 (8).jpeg", alt: "Gallery photo 8" },
   { src: "/assets/images/photos/1 (9).jpeg", alt: "Gallery photo 9" },
   { src: "/assets/images/photos/1 (10).jpeg", alt: "Gallery photo 10", objectPosition: "top center" },
-  { src: "/assets/images/photos/1 (11).jpeg", alt: "Gallery photo 11" },
-  { src: "/assets/images/photos/1 (12).jpeg", alt: "Gallery photo 12" },
   { src: "/assets/images/photos/1 (13).jpeg", alt: "Gallery photo 13", objectPosition: "top center" },
 ];
 
